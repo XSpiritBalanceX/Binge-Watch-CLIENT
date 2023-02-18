@@ -20,7 +20,7 @@ if (process.env.SERVE) {
 module.exports = {
   mode,
   plugins,
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   devtool: "source-map",
   output: {
     filename: "[name].js",
@@ -28,13 +28,16 @@ module.exports = {
     publicPath: "/dist",
     assetModuleFilename: "assets/[hash][ext][query]",
   },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js"],
+  },
   devServer: {
     hot: true,
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -44,11 +47,14 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        test: /\.(ts)x?$/,
+        exclude: /node_modules|\.d\.ts$/,
+        use: {
+          loader: "ts-loader",
+        },
       },
       {
-        test: /\.scss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
