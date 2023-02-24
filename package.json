@@ -6,7 +6,9 @@
   "scripts": {
     "start": "cross-env SERVE=true webpack serve --open --port 3000",
     "build": "webpack",
-    "build-prod": "webpack --mode=production"
+    "build-prod": "webpack --mode=production",
+    "server": "cd ./server && npm run server",
+    "dev": "concurrently \"npm start\" \"npm run server\""
   },
   "author": "",
   "license": "ISC",
@@ -19,9 +21,11 @@
     "@types/node": "^18.13.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "babel-loader": "^9.1.2",
+    "bootstrap": "^5.2.3",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
     "eslint": "^8.34.0",
@@ -30,6 +34,7 @@
     "node-sass": "^8.0.0",
     "path": "^0.12.7",
     "prettier": "^2.8.4",
+    "react-bootstrap": "^2.7.2",
     "react-refresh": "^0.14.0",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
@@ -41,8 +46,12 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "bootstrap-icons": "^1.10.3",
+    "concurrently": "^7.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-intl": "^6.2.10",
+    "react-router-dom": "^6.8.1",
     "styled-jsx": "^5.1.2",
     "web-vitals": "^3.1.1"
   }
