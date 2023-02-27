@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import NavBar from "./components/Navbar";
-import AuthPage from "./pages/AuthPage";
+import RegistrationPage from "./pages/RegistrationPage";
 import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   return (
@@ -11,8 +12,9 @@ const App = () => {
         <NavBar />
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/registration" element={<AuthPage />} />
-          <Route path="/login" element={<AuthPage />} />
+          <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
       </div>
     </BrowserRouter>

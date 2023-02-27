@@ -46,13 +46,16 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.11",
     "bootstrap-icons": "^1.10.3",
     "concurrently": "^7.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.2",
     "react-intl": "^6.2.10",
     "react-router-dom": "^6.8.1",
     "styled-jsx": "^5.1.2",
-    "web-vitals": "^3.1.1"
+    "web-vitals": "^3.1.1",
+    "yup": "^1.0.1"
   }
 }

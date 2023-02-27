@@ -14,13 +14,16 @@ const NavBar: FC = () => {
           </NavLink>
         </Navbar.Brand>
         <Nav className="justify-content-end">
+          <NavLink to={"/"} className="nav-link">
+            Главная
+          </NavLink>
           <NavLink to={"/catalog"} className="nav-link">
             Каталог
           </NavLink>
           <NavLink to={"/mypage"} className="nav-link">
             <i className="bi bi-person-circle"></i>
           </NavLink>
-          <NavLink to={"/registration"} className="nav-link">
+          <NavLink to={"/login"} className="nav-link">
             <i className="bi bi-box-arrow-in-right"></i>
           </NavLink>
         </Nav>
