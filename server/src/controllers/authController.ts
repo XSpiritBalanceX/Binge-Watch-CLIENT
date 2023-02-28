@@ -1,12 +1,24 @@
 import { UserModel } from "../dataBase/descriptionDB";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import ApiError from "../error/ApiError";
+
+type DataUser = {
+  username?: string;
+  email: string;
+  password: string;
+};
+const generateJwt = (id: number, email: string, username: string) => {
+  return jwt.sign({ id, email, username }, process.env.SECRET_KEY, {
+    expiresIn: "24h",
+  });
+};
 
 class AuthController {
   async registration(req: Request, res: Response, next: NextFunction) {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password }: DataUser = req.body;
       if (!username || !email || !password) {
         return next(ApiError.badRequest("All data not filled"));
       }
@@ -25,6 +37,27 @@ class AuthController {
         password: hashPassword,
       });
       return res.json({ message: "You have successfully registration!" });
+    } catch (err) {
+      return next(ApiError.internal("Something went wrong, please try again"));
+    }
+  }
+
+  async login(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { email, password }: DataUser = req.body;
+      const user = await UserModel.findOne({ where: { email } });
+      if (!user) {
+        return next(ApiError.internal("User is not found"));
+      }
+      const comparePassword: boolean = bcrypt.compareSync(
+        password,
+        user.password
+      );
+      if (!comparePassword) {
+        return next(ApiError.internal("Wrong password entered"));
+      }
+      const token = generateJwt(user.id, user.email, user.username);
+      return res.json({ token, message: "Successfully" });
     } catch (err) {
       return next(ApiError.internal("Something went wrong, please try again"));
     }
