@@ -4,18 +4,20 @@ import express, { Express } from "express";
 import sequelize from "./dataBase/db";
 import cors from "cors";
 import router from "./routes/index";
+import errorHandlingMiddleware from "./middleware/errorHandlingMiddleware";
 
 const PORT = 5000 || process.env.PORT;
 
 const app: Express = express();
 app.use(
   cors({
-    origin: "http://localhost:3000/",
+    origin: "*",
     methods: "GET, POST, PUT, DELETE",
   })
 );
 app.use(express.json());
 app.use("/api", router);
+app.use(errorHandlingMiddleware);
 
 const start = async () => {
   try {

@@ -57,7 +57,7 @@ class AuthController {
         return next(ApiError.internal("Wrong password entered"));
       }
       const token = generateJwt(user.id, user.email, user.username);
-      return res.json({ token, message: "Successfully" });
+      return res.status(200).json({ token, message: "Successfully" });
     } catch (err) {
       return next(ApiError.internal("Something went wrong, please try again"));
     }
