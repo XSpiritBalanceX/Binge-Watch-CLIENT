@@ -7,6 +7,7 @@ import router from "./routes/index";
 import errorHandlingMiddleware from "./middleware/errorHandlingMiddleware";
 import passport from "passport";
 import JWT from "passport-jwt";
+import session from "express-session";
 import { UserModel } from "./dataBase/descriptionDB";
 const JWTStrategy = JWT.Strategy;
 const ExtractJWT = JWT.ExtractJwt;
@@ -14,8 +15,15 @@ const ExtractJWT = JWT.ExtractJwt;
 const PORT = 5000 || process.env.PORT;
 
 const app: Express = express();
-
+app.use(
+  session({
+    secret: "little secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(passport.initialize());
+app.use(passport.session());
 passport.use(
   new JWTStrategy(
     {

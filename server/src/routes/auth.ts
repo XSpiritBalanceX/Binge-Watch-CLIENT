@@ -1,14 +1,18 @@
 import * as express from "express";
 import passport from "passport";
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 const authRouter = express.Router();
 import authController from "../controllers/authController";
 
 authRouter.post("/registration", authController.registration);
 authRouter.post("/login", authController.login);
-authRouter.get("/logout", (req: Request, res: Response) => {
-  //req.logout();
-  res.redirect("http://localhost:3000/");
+authRouter.get("/logout", (req: Request, res: Response, next: NextFunction) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("http://localhost:3000/");
+  });
 });
 authRouter.post(
   "/profile",
