@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Form, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,18 +8,22 @@ import ky from "ky";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/Auth.scss";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../store/actionCreators";
 
 type UserLoginForm = {
   email: string;
   password: string;
 };
 
-interface ResponseLogin {
+type ResponseLogin = {
   token: string;
   message: string;
-}
+};
 
 const LoginPage: FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const validationSchemaLogin = Yup.object().shape({
     email: Yup.string().required("Email обязателен").email("Неверный email"),
     password: Yup.string()
@@ -41,8 +45,9 @@ const LoginPage: FC = () => {
           json: { email: data.email, password: data.password },
         })
         .json();
+      navigate("/mypage");
       toast.success(response.message);
-      sessionStorage.setItem("token", response.token);
+      dispatch(loginUser(true, response.token));
     } catch (error: any) {
       if (error.name === "HTTPError") {
         const errorJson = await error.response.json();

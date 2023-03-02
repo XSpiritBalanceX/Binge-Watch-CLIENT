@@ -53,6 +53,7 @@ const RegistrationPage: FC = () => {
           },
         })
         .json();
+
       navigate("/login");
     } catch (error: any) {
       if (error.name === "HTTPError") {
