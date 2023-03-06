@@ -1,8 +1,9 @@
 import * as express from "express";
 import passport from "passport";
 import { Request, Response, NextFunction } from "express";
+import authController from "@controllers/authController";
+
 const authRouter = express.Router();
-import authController from "../controllers/authController";
 
 authRouter.post("/registration", authController.registration);
 authRouter.post("/login", authController.login);

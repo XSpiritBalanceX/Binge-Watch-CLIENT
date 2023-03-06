@@ -1,8 +1,8 @@
-import { UserModel } from "../dataBase/descriptionDB";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import ApiError from "../error/ApiError";
+import { UserModel } from "@dataBase/descriptionDB";
+import ApiError from "@error";
 
 type DataUser = {
   username?: string;

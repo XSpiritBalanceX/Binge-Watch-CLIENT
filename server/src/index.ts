@@ -1,14 +1,17 @@
+import "module-alias/register";
 import * as dotenv from "dotenv";
-dotenv.config();
 import express, { Express } from "express";
-import sequelize from "./dataBase/db";
+import sequelize from "@dataBase/db";
 import cors from "cors";
 import router from "./routes/index";
-import errorHandlingMiddleware from "./middleware/errorHandlingMiddleware";
+import errorHandlingMiddleware from "@middleware";
 import passport from "passport";
 import JWT from "passport-jwt";
 import session from "express-session";
-import { UserModel } from "./dataBase/descriptionDB";
+import { UserModel } from "@dataBase/descriptionDB";
+
+dotenv.config();
+
 const JWTStrategy = JWT.Strategy;
 const ExtractJWT = JWT.ExtractJwt;
 

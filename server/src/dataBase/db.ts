@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
-dotenv.config();
 import { Sequelize } from "sequelize";
+dotenv.config();
 
 export default new Sequelize(
   process.env.PGDATABASE,
