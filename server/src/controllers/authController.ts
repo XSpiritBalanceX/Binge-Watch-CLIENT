@@ -62,6 +62,23 @@ class AuthController {
       return next(ApiError.internal("Something went wrong, please try again"));
     }
   }
+
+  auth(req: Request, res: Response, next: NextFunction) {
+    try {
+      return res.status(200).json({ message: req.user });
+    } catch (err) {
+      return next(ApiError.internal("Something went wrong, please try again"));
+    }
+  }
+
+  logoutApp(req: Request, res: Response, next: NextFunction) {
+    req.logout(function (err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("http://localhost:3000/");
+    });
+  }
 }
 
 export default new AuthController();
