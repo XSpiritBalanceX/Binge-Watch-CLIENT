@@ -7,9 +7,9 @@ import * as Yup from "yup";
 import ky from "ky";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/Auth.scss";
+import "@/styles/Auth.scss";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../store/actionCreators";
+import { loginUser } from "@/store/actionCreators";
 
 type UserLoginForm = {
   email: string;

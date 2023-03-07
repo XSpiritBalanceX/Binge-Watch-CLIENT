@@ -2,12 +2,13 @@ import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { getUserInfo } from "../store/actionCreators";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { getUserInfo } from "@/store/actionCreators";
 import { Spinner } from "react-bootstrap";
-import "../styles/MyPage.scss";
+import "@/styles/MyPage.scss";
 import { useNavigate } from "react-router-dom";
-const avatar = require("../images/cat.jpg");
+
+const avatar = require("@/images/cat.jpg");
 
 const MyPage: FC = () => {
   const [isLoading, setLoading] = useState<boolean>(true);
