@@ -7,7 +7,7 @@
     "[module-name]": false
   },
   "scripts": {
-    "start": "cross-env SERVE=true webpack serve --open --port 3000",
+    "start": "cross-env SERVE=true webpack serve --open ",
     "build": "webpack",
     "build-prod": "webpack --mode=production",
     "server": "cd ./server && npm run server",

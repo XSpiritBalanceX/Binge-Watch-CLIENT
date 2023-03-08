@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import ky from "ky";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/Auth.scss";
 import { useDispatch } from "react-redux";
@@ -38,7 +38,7 @@ const LoginPage: FC = () => {
   } = useForm<UserLoginForm>({
     resolver: yupResolver(validationSchemaLogin),
   });
-  const onSubmitRegistration: any = async (data: UserLoginForm) => {
+  const onSubmitLogin: any = async (data: UserLoginForm) => {
     try {
       const response: ResponseLogin = await ky
         .post("http://localhost:5000/api/users/login", {
@@ -57,13 +57,12 @@ const LoginPage: FC = () => {
   };
   return (
     <div>
-      <ToastContainer position="top-center" autoClose={5000} theme="colored" />
       <Container className="d-flex justify-content-center align-items-center ">
         <Card className="p-5 m-5 FormLogin">
           <h2 className="m-auto">Авторизация</h2>
           <Form
             className="d-flex flex-column mt-3"
-            onSubmit={handleSubmit(onSubmitRegistration)}
+            onSubmit={handleSubmit(onSubmitLogin)}
           >
             <Form.Label>Email</Form.Label>
             <Form.Control

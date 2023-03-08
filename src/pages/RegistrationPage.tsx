@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import ky from "ky";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/Auth.scss";
 
@@ -65,7 +65,6 @@ const RegistrationPage: FC = () => {
 
   return (
     <div>
-      <ToastContainer position="top-center" autoClose={5000} theme="colored" />
       <Container className="d-flex justify-content-center align-items-center ">
         <Card className="p-5 m-5 FormRegistration">
           <h2 className="m-auto">Регистрация</h2>

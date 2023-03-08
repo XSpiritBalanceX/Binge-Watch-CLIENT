@@ -1,19 +1,18 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { getUserInfo } from "@/store/actionCreators";
 import { Spinner } from "react-bootstrap";
 import "@/styles/MyPage.scss";
 import { useNavigate } from "react-router-dom";
+import * as userSelectors from "@/store/selectors";
 
 const avatar = require("@/images/cat.jpg");
 
 const MyPage: FC = () => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
-  const { userName } = useTypedSelector((state) => state);
+  const userName = useTypedSelector(userSelectors.userNameSelect);
   const navigate = useNavigate();
   useEffect(() => {
     (async function () {
@@ -35,7 +34,6 @@ const MyPage: FC = () => {
   }, [dispatch]);
   return (
     <React.Fragment>
-      <ToastContainer position="top-center" autoClose={5000} theme="colored" />
       {isLoading ? (
         <Spinner animation="border" variant="light" className="spiner" />
       ) : (

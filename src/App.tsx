@@ -6,12 +6,20 @@ import MainPage from "@/pages/MainPage";
 import LoginPage from "@/pages/LoginPage";
 import MyPage from "@/pages/MyPage";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
+import * as userSelectors from "@/store/selectors";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  const { isLogin } = useTypedSelector((state) => state);
+  const isLogin = useTypedSelector(userSelectors.isLoginSelect);
   return (
     <BrowserRouter>
       <div>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          theme="colored"
+        />
         <NavBar />
         <Routes>
           <Route path="/" element={<MainPage />} />

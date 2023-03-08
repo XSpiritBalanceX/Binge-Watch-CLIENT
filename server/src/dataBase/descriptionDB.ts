@@ -12,14 +12,18 @@ interface UserModel
     InferAttributes<UserModel>,
     InferCreationAttributes<UserModel>
   > {
-  id: CreationOptional<number>;
+  id: CreationOptional<string>;
   username: string;
   email: string;
   password: string;
 }
 
 const UserModel = sequelize.define<UserModel>("bwusers", {
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
   username: { type: DataTypes.STRING, unique: true },
   email: { type: DataTypes.STRING, unique: true },
   password: { type: DataTypes.STRING },
