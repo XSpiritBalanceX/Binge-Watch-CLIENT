@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import NavBar from "@/components/Navbar";
-import RegistrationPage from "@/pages/RegistrationPage";
+import AuthPage from "@/pages/AuthPage";
 import MainPage from "@/pages/MainPage";
-import LoginPage from "@/pages/LoginPage";
 import MyPage from "@/pages/MyPage";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import * as userSelectors from "@/store/selectors";
@@ -24,8 +23,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<MainPage />} />
           {isLogin && <Route path="/mypage" element={<MyPage />} />}
-          <Route path="/registration" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/registration" element={<AuthPage />} />
+          <Route path="/login" element={<AuthPage />} />
           <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
       </div>
