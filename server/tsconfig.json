@@ -1,11 +1,19 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
     "target": "es6",
+    "module": "CommonJS",
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "sourceMap": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "paths": {
+      "@dataBase/*": ["dataBase/*"],
+      "@error": ["error/ApiError.ts"],
+      "@controllers/*": ["controllers/*"],
+      "@middleware": ["middleware/errorHandlingMiddleware.ts"]
+    }
   },
   "lib": ["es2015"],
   "exclude": ["node_modules"]

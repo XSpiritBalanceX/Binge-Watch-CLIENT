@@ -1,6 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 let mode = "development";
 if (process.env.NODE_ENV === "production") {
@@ -11,6 +12,7 @@ const plugins = [
   new MiniCssExtractPlugin({
     filename: "[name].css",
   }),
+  new TsconfigPathsPlugin(),
 ];
 
 if (process.env.SERVE) {
@@ -30,9 +32,14 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
   },
   devServer: {
     hot: true,
+    port: 3000,
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -64,6 +71,10 @@ module.exports = {
             loader: "sass-loader",
           },
         ],
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        type: "asset/resource",
       },
     ],
   },

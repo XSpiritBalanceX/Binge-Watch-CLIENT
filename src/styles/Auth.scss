@@ -1,0 +1,17 @@
+@import "variables";
+
+.FormRegistration,
+.FormLogin {
+    background-color: transparent;
+    width: 60%;
+    position: absolute;
+    top: 10%;
+    border: 2px solid map-deep-get($theme-colors, "border", "grey");
+    input {
+        background-color: transparent;
+        color: map-deep-get($theme-colors, "text", "grey");
+    }
+}
+.FormLogin {
+    top: 20%;
+}

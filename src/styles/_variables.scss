@@ -1,0 +1,18 @@
+@use "sass:map";
+
+$theme-colors: (
+    "main": #64b5ff,
+    "border": (
+        "grey": rgba(255, 255, 255, 0.55),
+    ),
+    "text": (
+        "grey": rgba(255, 255, 255, 0.55),
+    ),
+);
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
