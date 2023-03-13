@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "@/styles/Navbar.scss";
@@ -6,7 +6,7 @@ import SignInOut from "./SignInOut";
 
 const logo = require("@/images/logo.png");
 
-const NavBar: FC = () => {
+const NavBar = () => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>

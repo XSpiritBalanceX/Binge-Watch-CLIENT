@@ -1,6 +1,6 @@
-import React, { FC, useEffect } from "react";
+import React from "react";
 
-const MainPage: FC = () => {
+const MainPage = () => {
   return <div>Page Main</div>;
 };
 

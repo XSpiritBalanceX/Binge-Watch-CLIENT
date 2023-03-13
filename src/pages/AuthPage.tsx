@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React from "react";
 import { Container, Card } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import "@/styles/Auth.scss";
 import RegistrationForm from "@/components/RegistrationForm";
 import LoginForm from "@/components/LoginForm";
 
-const RegistrationPage: FC = () => {
+const RegistrationPage = () => {
   const location = useLocation();
   const isLoginForm = location.pathname === "/login";
 

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { getUserInfo } from "@/store/actionCreators";
@@ -9,7 +9,7 @@ import * as userSelectors from "@/store/selectors";
 
 const avatar = require("@/images/cat.jpg");
 
-const MyPage: FC = () => {
+const MyPage = () => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
   const userName = useTypedSelector(userSelectors.userNameSelect);

@@ -19,7 +19,6 @@ class AuthController {
   async registration(req: Request, res: Response, next: NextFunction) {
     try {
       const { username, email, password }: DataUser = req.body;
-      console.log(req.body);
       if (!username || !email || !password) {
         return next(ApiError.badRequest("All data not filled"));
       }

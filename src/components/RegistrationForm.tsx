@@ -68,24 +68,6 @@ const RegistrationForm = () => {
       navigate("/login");
       toast.success(dataResponse.message);
     }
-    /* try {
-      const response: ResponseRegistration = await ky
-        .post("http://localhost:5000/api/users/registration", {
-          json: {
-            username: data.username,
-            email: data.email,
-            password: data.password,
-          },
-        })
-        .json();
-
-      navigate("/login");
-    } catch (error: any) {
-      if (error.name === "HTTPError") {
-        const errorJson = await error.response.json();
-        toast.error(errorJson.message);
-      }
-    } */
   };
 
   return (
