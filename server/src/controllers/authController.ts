@@ -9,7 +9,7 @@ type DataUser = {
   email: string;
   password: string;
 };
-const generateJwt = (id: number, email: string, username: string) => {
+const generateJwt = (id: string, email: string, username: string) => {
   return jwt.sign({ id, email, username }, process.env.SECRET_KEY, {
     expiresIn: "24h",
   });
@@ -19,6 +19,7 @@ class AuthController {
   async registration(req: Request, res: Response, next: NextFunction) {
     try {
       const { username, email, password }: DataUser = req.body;
+      console.log(req.body);
       if (!username || !email || !password) {
         return next(ApiError.badRequest("All data not filled"));
       }

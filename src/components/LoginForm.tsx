@@ -10,16 +10,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { loginUser } from "@/store/actionCreators";
 import classNames from "classnames";
+import { fetchWrapper } from "@/components/fetchWrapper";
 
 type UserLoginForm = {
   email: string;
   password: string;
 };
 
-type ResponseLogin = {
+interface ResponseLogin {
   token: string;
   message: string;
-};
+}
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -49,20 +50,14 @@ const LoginForm = () => {
   });
 
   const onSubmitLogin: any = async (data: UserLoginForm) => {
-    try {
-      const response: ResponseLogin = await ky
-        .post("http://localhost:5000/api/users/login", {
-          json: { email: data.email, password: data.password },
-        })
-        .json();
+    let dataResponse: ResponseLogin = (await fetchWrapper.loginUser({
+      email: data.email,
+      password: data.password,
+    })) as ResponseLogin;
+    if (dataResponse) {
       navigate("/mypage");
-      toast.success(response.message);
-      dispatch(loginUser(true, response.token));
-    } catch (error: any) {
-      if (error.name === "HTTPError") {
-        const errorJson = await error.response.json();
-        toast.error(errorJson.message);
-      }
+      toast.success(dataResponse.message);
+      dispatch(loginUser(true, dataResponse.token));
     }
   };
 

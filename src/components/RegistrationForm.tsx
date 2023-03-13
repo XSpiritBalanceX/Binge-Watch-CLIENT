@@ -8,6 +8,7 @@ import ky from "ky";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
+import { fetchWrapper } from "./fetchWrapper";
 
 type UserRegistrationForm = {
   username: string;
@@ -16,9 +17,9 @@ type UserRegistrationForm = {
   confirmPassword: string;
 };
 
-type ResponseRegistration = {
+interface ResponseRegistration {
   message: string;
-};
+}
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -57,7 +58,17 @@ const RegistrationForm = () => {
   });
 
   const onSubmitRegistration: any = async (data: UserRegistrationForm) => {
-    try {
+    let dataResponse: ResponseRegistration =
+      (await fetchWrapper.registrationUser({
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      })) as ResponseRegistration;
+    if (dataResponse) {
+      navigate("/login");
+      toast.success(dataResponse.message);
+    }
+    /* try {
       const response: ResponseRegistration = await ky
         .post("http://localhost:5000/api/users/registration", {
           json: {
@@ -74,7 +85,7 @@ const RegistrationForm = () => {
         const errorJson = await error.response.json();
         toast.error(errorJson.message);
       }
-    }
+    } */
   };
 
   return (

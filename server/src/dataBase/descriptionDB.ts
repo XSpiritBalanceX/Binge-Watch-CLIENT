@@ -5,6 +5,7 @@ import {
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
+  literal,
 } from "sequelize";
 
 interface UserModel
@@ -18,10 +19,14 @@ interface UserModel
   password: string;
 }
 
+sequelize.beforeSync(async () => {
+  await sequelize.query('CREATE EXTENSION IF NOT EXISTS "pgcrypto"');
+});
+
 const UserModel = sequelize.define<UserModel>("bwusers", {
   id: {
     type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    defaultValue: literal("gen_random_uuid()"),
     primaryKey: true,
   },
   username: { type: DataTypes.STRING, unique: true },
