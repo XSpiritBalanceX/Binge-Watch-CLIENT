@@ -8,6 +8,7 @@ import { useTypedSelector } from "@/hooks/useTypedSelector";
 import * as userSelectors from "@/store/selectors";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CatalogPage from "@/pages/CatalogPage";
 
 const App = () => {
   const isLogin = useTypedSelector(userSelectors.isLoginSelect);
@@ -25,6 +26,7 @@ const App = () => {
           {isLogin && <Route path="/mypage" element={<MyPage />} />}
           <Route path="/registration" element={<AuthPage />} />
           <Route path="/login" element={<AuthPage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
           <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
       </div>
