@@ -16,3 +16,8 @@ $theme-colors: (
     }
     @return $map;
 }
+
+%display-row {
+    display: flex;
+    flex-direction: row;
+}
