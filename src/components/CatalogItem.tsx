@@ -7,7 +7,7 @@ interface SeriesProps {
   url: string;
 }
 
-const SeriesInCatalog = ({ name, url }: SeriesProps) => {
+const CatalogItem = ({ name, url }: SeriesProps) => {
   return (
     <Card className="cardSeries">
       <Card.Img variant="top" src={url} title={name} />
@@ -19,4 +19,4 @@ const SeriesInCatalog = ({ name, url }: SeriesProps) => {
   );
 };
 
-export default SeriesInCatalog;
+export default CatalogItem;

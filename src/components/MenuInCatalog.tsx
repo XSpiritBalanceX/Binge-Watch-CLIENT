@@ -4,19 +4,19 @@ import { NavLink } from "react-router-dom";
 const MenuInCatalog = () => {
   return (
     <React.Fragment>
-      <NavLink to={"/catalog/detective"} className="nav-link">
+      <NavLink to={"/catalog/детектив"} className="nav-link">
         Детектив
       </NavLink>
-      <NavLink to={"/catalog/drama"} className="nav-link">
+      <NavLink to={"/catalog/драма"} className="nav-link">
         Драма
       </NavLink>
-      <NavLink to={"/catalog/comedy"} className="nav-link">
+      <NavLink to={"/catalog/комедия"} className="nav-link">
         Комедия
       </NavLink>
-      <NavLink to={"/catalog/melodrama"} className="nav-link">
+      <NavLink to={"/catalog/мелодрама"} className="nav-link">
         Мелодрама
       </NavLink>
-      <NavLink to={"/catalog"} className="nav-link">
+      <NavLink to={"/catalog/сериалы"} className="nav-link">
         Все
       </NavLink>
     </React.Fragment>

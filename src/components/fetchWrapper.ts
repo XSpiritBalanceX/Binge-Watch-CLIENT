@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 enum APIRouters {
   registration = "http://localhost:5000/api/users/registration",
   login = "http://localhost:5000/api/users/login",
-  allCatalog = "http://localhost:5000/api/series/getall",
+  allCatalog = "http://localhost:5000/api/series",
 }
 
 type UserData = {
@@ -55,9 +55,11 @@ async function loginUser(body: UserData) {
   }
 }
 
-async function getAllSeries() {
+async function getAllSeries(genrePage: string | undefined) {
   try {
-    const response = await ky.get(APIRouters.allCatalog);
+    const response = await ky.get(
+      `${APIRouters.allCatalog}?genre=${genrePage}`
+    );
     if (response.status !== 200) {
       toast.error(response.statusText);
     } else {

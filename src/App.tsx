@@ -26,7 +26,6 @@ const App = () => {
           {isLogin && <Route path="/mypage" element={<MyPage />} />}
           <Route path="/registration" element={<AuthPage />} />
           <Route path="/login" element={<AuthPage />} />
-          <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/:name" element={<CatalogPage />} />
           <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>

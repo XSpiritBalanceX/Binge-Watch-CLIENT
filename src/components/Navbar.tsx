@@ -23,7 +23,7 @@ const NavBar = () => {
           <NavLink to={"/"} className="nav-link">
             Главная
           </NavLink>
-          <NavLink to={"/catalog"} className="nav-link">
+          <NavLink to={"/catalog/сериалы"} className="nav-link">
             Каталог
           </NavLink>
           {isLogin && (

@@ -3,7 +3,7 @@ import seriesController from "@controllers/seriesController";
 
 const seriesRouter = express.Router();
 
-seriesRouter.get("/getall", seriesController.getAllSeries);
-seriesRouter.get("/getone", seriesController.getOneSeries);
+seriesRouter.get("/", seriesController.allSeries);
+seriesRouter.get("/:id", seriesController.oneSeries);
 
 export default seriesRouter;
