@@ -3,16 +3,18 @@ import { Card, Button } from "react-bootstrap";
 import "@/styles/CatalogPage.scss";
 
 interface SeriesProps {
-  name: string;
-  url: string;
+  info: {
+    name: string;
+    url: string;
+  };
 }
 
-const CatalogItem = ({ name, url }: SeriesProps) => {
+const CatalogItem = ({ info }: SeriesProps) => {
   return (
     <Card className="cardSeries">
-      <Card.Img variant="top" src={url} title={name} />
+      <Card.Img variant="top" src={info.url} title={info.name} />
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title>{info.name}</Card.Title>
         <Button variant="primary">Посмотреть</Button>
       </Card.Body>
     </Card>
