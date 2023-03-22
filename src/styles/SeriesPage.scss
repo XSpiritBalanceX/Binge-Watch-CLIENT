@@ -1,0 +1,26 @@
+@import "variables";
+
+.containerSeriesPage {
+    @extend %display-row;
+    margin: 3%;
+}
+.buttonSeries {
+    @extend %display-column;
+    button {
+        margin-bottom: 20px;
+    }
+}
+.containerCard {
+    width: 80%;
+    padding: 0 10% 0 15%;
+    h3 {
+        text-align: center;
+        span {
+            font-size: 17px;
+        }
+    }
+    img {
+        width: 100%;
+        height: 25em;
+    }
+}

@@ -9,6 +9,7 @@ import * as userSelectors from "@/store/selectors";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CatalogPage from "@/pages/CatalogPage";
+import SeriesPage from "./pages/SeriesPage";
 
 const App = () => {
   const isLogin = useTypedSelector(userSelectors.isLoginSelect);
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/registration" element={<AuthPage />} />
           <Route path="/login" element={<AuthPage />} />
           <Route path="/catalog/:name" element={<CatalogPage />} />
+          <Route path="/series/:id" element={<SeriesPage />} />
           <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
       </div>

@@ -21,3 +21,8 @@ $theme-colors: (
     display: flex;
     flex-direction: row;
 }
+
+%display-column {
+    display: flex;
+    flex-direction: column;
+}

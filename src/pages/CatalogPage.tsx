@@ -2,9 +2,9 @@ import React from "react";
 import "@/styles/CatalogPage.scss";
 import CatalogItem from "@/components/CatalogItem";
 import { Spinner } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import MenuInCatalog from "@/components/MenuInCatalog";
-import useCatalogFetch from "@/hooks/useCatalogFetch";
+import { useCatalogFetch } from "@/hooks/useCatalogFetch";
 import queryString from "query-string";
 import { APIRouters } from "@/components/fetchWrapper";
 import { toast } from "react-toastify";
@@ -16,10 +16,15 @@ const CatalogPage = () => {
     url: APIRouters.allCatalog,
     query: { genre: genrePageCatalog },
   });
+  const navigate = useNavigate();
   const { data, loading, error } = useCatalogFetch(decodeURI(urlCatalog));
   if (error) {
     toast.error(error);
   }
+
+  const goToSeriesPage = (id: number) => {
+    navigate("/series/" + id);
+  };
 
   return (
     <React.Fragment>
@@ -32,7 +37,13 @@ const CatalogPage = () => {
           </div>
           <div className="contentCatalog">
             {data.map((el) => {
-              return <CatalogItem key={el.id} info={el} />;
+              return (
+                <CatalogItem
+                  key={el.id}
+                  info={el}
+                  cbGoToSeriesPage={goToSeriesPage}
+                />
+              );
             })}
           </div>
         </div>

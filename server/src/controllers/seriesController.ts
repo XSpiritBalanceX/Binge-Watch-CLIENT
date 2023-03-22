@@ -25,7 +25,7 @@ class SeriesController {
   async oneSeries(req: Request, res: Response, next: NextFunction) {
     try {
       const id: string = req.params.id as string;
-      const oneSeries = await Catalog.findAll({ where: { id } });
+      const oneSeries = await Catalog.findOne({ where: { id } });
       return res.json(oneSeries);
     } catch (err) {
       return next(ApiError.internal("Something went wrong, please try again"));

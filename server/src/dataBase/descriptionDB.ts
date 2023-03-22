@@ -27,6 +27,7 @@ interface CatalogModel
   id: CreationOptional<number>;
   name: string;
   url: string;
+  urlscreen: string;
   year: number;
   seasons: number;
   genre: string;
@@ -53,6 +54,7 @@ const Catalog = sequelize.define<CatalogModel>("bwseries", {
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: DataTypes.TEXT },
   url: { type: DataTypes.TEXT },
+  urlscreen: { type: DataTypes.TEXT },
   year: { type: DataTypes.INTEGER },
   seasons: { type: DataTypes.INTEGER },
   genre: { type: DataTypes.TEXT },
