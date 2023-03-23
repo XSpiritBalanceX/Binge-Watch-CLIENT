@@ -1,11 +1,12 @@
 import ky from "ky";
 import { toast } from "react-toastify";
 
-export enum APIRouters {
+enum APIRouters {
   registration = "http://localhost:5000/api/users/registration",
   login = "http://localhost:5000/api/users/login",
-  allCatalog = "http://localhost:5000/api/series",
 }
+
+export const urlToCatalog: string = "http://localhost:5000/api/series";
 
 type UserData = {
   username?: string;

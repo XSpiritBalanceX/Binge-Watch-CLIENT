@@ -6,7 +6,7 @@ interface InfoSeriesProps {
   infoSeries: AllSeries;
 }
 
-const CardItem: FC<InfoSeriesProps> = ({ infoSeries }) => {
+const CardItem = ({ infoSeries }: InfoSeriesProps) => {
   const newSeasons =
     infoSeries.dateofnewseason === "закрыт"
       ? "Сериал закрыт"

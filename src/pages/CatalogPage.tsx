@@ -5,30 +5,25 @@ import { Spinner } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import MenuInCatalog from "@/components/MenuInCatalog";
 import { useCatalogFetch } from "@/hooks/useCatalogFetch";
-import queryString from "query-string";
-import { APIRouters } from "@/components/fetchWrapper";
-import { toast } from "react-toastify";
+import { urlToCatalog } from "@/components/fetchWrapper";
 
 const CatalogPage = () => {
   const params = useParams();
-  const genrePageCatalog: string | undefined = params.name;
-  const urlCatalog: string = queryString.stringifyUrl({
-    url: APIRouters.allCatalog,
-    query: { genre: genrePageCatalog },
-  });
+  const genrePageCatalog = params.name as string;
   const navigate = useNavigate();
-  const { data, loading, error } = useCatalogFetch(decodeURI(urlCatalog));
-  if (error) {
-    toast.error(error);
-  }
-
-  const goToSeriesPage = (id: number) => {
+  const { data, loading, error } = useCatalogFetch(
+    urlToCatalog,
+    genrePageCatalog
+  );
+  const goToSeriesPage = (id: string) => {
     navigate("/series/" + id);
   };
 
   return (
     <React.Fragment>
-      {loading ? (
+      {error ? (
+        <div className="errorDiv">Упс... Что-то пошло не так</div>
+      ) : loading ? (
         <Spinner animation="border" variant="light" className="spiner" />
       ) : (
         <div className="containerCatalog">

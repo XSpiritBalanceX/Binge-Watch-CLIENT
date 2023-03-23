@@ -1,9 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSeriesFetch } from "@/hooks/useCatalogFetch";
-import queryString from "query-string";
-import { APIRouters } from "@/components/fetchWrapper";
-import { toast } from "react-toastify";
+import { urlToCatalog } from "@/components/fetchWrapper";
 import { Spinner, Button } from "react-bootstrap";
 import CardItem from "@/components/CardItem";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
@@ -12,18 +10,15 @@ import "@/styles/SeriesPage.scss";
 
 const SeriesPage = () => {
   const params = useParams();
-  const seriesID: string | undefined = params.id;
-  const urlSeries: string = queryString.stringifyUrl({
-    url: APIRouters.allCatalog + "/" + seriesID,
-  });
-  const { data, loading, error } = useSeriesFetch(urlSeries);
-  if (error) {
-    toast.error(error);
-  }
+  const seriesID = params.id as string;
+  const { data, loading, error } = useSeriesFetch(urlToCatalog, seriesID);
   const isLogin = useTypedSelector(userSelectors.isLoginSelect);
+
   return (
     <React.Fragment>
-      {loading ? (
+      {error ? (
+        <div className="errorDiv">Упс... Что-то пошло не так</div>
+      ) : loading ? (
         <Spinner animation="border" variant="light" className="spiner" />
       ) : (
         <div className="containerSeriesPage">

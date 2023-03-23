@@ -24,7 +24,7 @@ interface CatalogModel
     InferAttributes<CatalogModel>,
     InferCreationAttributes<CatalogModel>
   > {
-  id: CreationOptional<number>;
+  id: CreationOptional<string>;
   name: string;
   url: string;
   urlscreen: string;
@@ -51,7 +51,11 @@ const UserModel = sequelize.define<UserModel>("bwusers", {
 });
 
 const Catalog = sequelize.define<CatalogModel>("bwseries", {
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: literal("gen_random_uuid()"),
+    primaryKey: true,
+  },
   name: { type: DataTypes.TEXT },
   url: { type: DataTypes.TEXT },
   urlscreen: { type: DataTypes.TEXT },

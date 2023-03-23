@@ -5,7 +5,7 @@ import { AllSeries } from "@/hooks/useCatalogFetch";
 
 interface SeriesProps {
   info: AllSeries;
-  cbGoToSeriesPage: (id: number) => void;
+  cbGoToSeriesPage: (id: string) => void;
 }
 
 const CatalogItem = ({ info, cbGoToSeriesPage }: SeriesProps) => {
@@ -16,7 +16,7 @@ const CatalogItem = ({ info, cbGoToSeriesPage }: SeriesProps) => {
         <Card.Title>{info.name}</Card.Title>
         <Button
           variant="outline-info"
-          onClick={(e) => cbGoToSeriesPage(info.id as number)}
+          onClick={(e) => cbGoToSeriesPage(info.id as string)}
         >
           Посмотреть
         </Button>
