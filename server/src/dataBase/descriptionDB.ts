@@ -19,6 +19,22 @@ interface UserModel
   password: string;
 }
 
+interface CatalogModel
+  extends Model<
+    InferAttributes<CatalogModel>,
+    InferCreationAttributes<CatalogModel>
+  > {
+  id: CreationOptional<string>;
+  name: string;
+  url: string;
+  urlscreen: string;
+  year: number;
+  seasons: number;
+  genre: string;
+  description: string;
+  dateofnewseason: string;
+}
+
 sequelize.beforeSync(async () => {
   await sequelize.query('CREATE EXTENSION IF NOT EXISTS "pgcrypto"');
 });
@@ -34,4 +50,20 @@ const UserModel = sequelize.define<UserModel>("bwusers", {
   password: { type: DataTypes.STRING },
 });
 
-export { UserModel };
+const Catalog = sequelize.define<CatalogModel>("bwseries", {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: literal("gen_random_uuid()"),
+    primaryKey: true,
+  },
+  name: { type: DataTypes.TEXT },
+  url: { type: DataTypes.TEXT },
+  urlscreen: { type: DataTypes.TEXT },
+  year: { type: DataTypes.INTEGER },
+  seasons: { type: DataTypes.INTEGER },
+  genre: { type: DataTypes.TEXT },
+  description: { type: DataTypes.TEXT },
+  dateofnewseason: { type: DataTypes.TEXT },
+});
+
+export { UserModel, Catalog };

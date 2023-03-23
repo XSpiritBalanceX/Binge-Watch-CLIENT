@@ -3,10 +3,14 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "@/styles/Navbar.scss";
 import SignInOut from "./SignInOut";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import * as userSelectors from "@/store/selectors";
 
 const logo = require("@/images/logo.png");
 
 const NavBar = () => {
+  const isLogin = useTypedSelector(userSelectors.isLoginSelect);
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -19,12 +23,14 @@ const NavBar = () => {
           <NavLink to={"/"} className="nav-link">
             Главная
           </NavLink>
-          <NavLink to={"/catalog"} className="nav-link">
+          <NavLink to={"/catalog/сериалы"} className="nav-link">
             Каталог
           </NavLink>
-          <NavLink to={"/mypage"} className="nav-link">
-            <i className="bi bi-person-circle"></i>
-          </NavLink>
+          {isLogin && (
+            <NavLink to={"/mypage"} className="nav-link">
+              <i className="bi bi-person-circle"></i>
+            </NavLink>
+          )}
           <SignInOut />
         </Nav>
       </Container>

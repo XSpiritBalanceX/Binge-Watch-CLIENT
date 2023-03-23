@@ -9,6 +9,6 @@ export default new Sequelize(
   {
     dialect: "postgres",
     host: process.env.PGHOST,
-    port: 7845,
+    port: 5694,
   }
 );

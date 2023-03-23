@@ -1,0 +1,24 @@
+@import "variables";
+
+.containerCatalog {
+    @extend %display-row;
+    margin: 3%;
+}
+.menuCatalog {
+    width: 120px;
+    margin-right: 100px;
+}
+.contentCatalog {
+    @extend %display-row;
+    flex-wrap: wrap;
+}
+
+.cardSeries {
+    width: 15em;
+    height: 27em;
+    background-color: transparent;
+    margin: 0 2% 5% 0;
+    img {
+        height: 20em;
+    }
+}
