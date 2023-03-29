@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { AllSeries } from "@/hooks/useCatalogFetch";
 import "@/styles/SeriesPage.scss";
 
