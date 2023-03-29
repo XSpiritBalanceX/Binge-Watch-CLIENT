@@ -2,12 +2,15 @@ import { UserState, UserAction, UserActionTypes } from "./typesForReducer";
 
 let tokenInStorage: string | null = sessionStorage.getItem("token");
 
-const initialState: UserState = {
+export const initialState: UserState = {
   isLogin: tokenInStorage !== null ? true : false,
   userName: null,
 };
 
-function userReducer(state = initialState, action: UserAction): UserState {
+export function userReducer(
+  state = initialState,
+  action: UserAction
+): UserState {
   switch (action.type) {
     case UserActionTypes.ISLOGIN_USER: {
       let newState = { ...state };
