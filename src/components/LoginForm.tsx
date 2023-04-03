@@ -67,6 +67,7 @@ const LoginForm = () => {
     >
       <Form.Label>Email</Form.Label>
       <Form.Control
+        aria-label="email"
         type="email"
         {...register("email")}
         className={formClassEmail}
@@ -74,6 +75,7 @@ const LoginForm = () => {
       <div className="invalid-feedback">{errors.email?.message}</div>
       <Form.Label>Пароль</Form.Label>
       <Form.Control
+        aria-label="password"
         type="password"
         {...register("password")}
         className={formClassPassword}

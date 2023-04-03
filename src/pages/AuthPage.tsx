@@ -13,7 +13,7 @@ const RegistrationPage = () => {
     <div>
       <Container className="d-flex justify-content-center align-items-center ">
         <Card className="p-5 m-5 FormRegistration">
-          <h2 className="m-auto">
+          <h2 className="m-auto" role="authRole">
             {isLoginForm ? "Авторизация" : "Регистрация"}
           </h2>
           {isLoginForm ? <LoginForm /> : <RegistrationForm />}

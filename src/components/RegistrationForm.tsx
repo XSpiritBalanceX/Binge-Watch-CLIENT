@@ -77,6 +77,7 @@ const RegistrationForm = () => {
     >
       <Form.Label>Имя пользователя</Form.Label>
       <Form.Control
+        aria-label="name"
         type="text"
         {...register("username")}
         className={formClassUserName}
@@ -84,6 +85,7 @@ const RegistrationForm = () => {
       <div className="invalid-feedback">{errors.username?.message}</div>
       <Form.Label>Email</Form.Label>
       <Form.Control
+        aria-label="email"
         type="email"
         {...register("email")}
         className={formClassEmail}
@@ -91,6 +93,7 @@ const RegistrationForm = () => {
       <div className="invalid-feedback">{errors.email?.message}</div>
       <Form.Label>Пароль</Form.Label>
       <Form.Control
+        aria-label="password"
         type="password"
         {...register("password")}
         className={formClassPassword}
@@ -98,6 +101,7 @@ const RegistrationForm = () => {
       <div className="invalid-feedback">{errors.password?.message}</div>
       <Form.Label>Повторите пароль</Form.Label>
       <Form.Control
+        aria-label="repeatpassword"
         type="password"
         {...register("confirmPassword")}
         className={formClassConfirmPassword}
