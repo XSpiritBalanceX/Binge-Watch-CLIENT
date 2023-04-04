@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
+import * as userSelectors from "@/store/selectors";
 import "@/styles/Navbar.scss";
 
 const SignInOut = () => {
-  const { isLogin } = useTypedSelector((store) => store);
+  const isLogin = useTypedSelector(userSelectors.isLoginSelect);
   const navigate = useNavigate();
   const goToLink = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault();
@@ -16,7 +17,12 @@ const SignInOut = () => {
     }
   };
   return (
-    <NavLink to={"/login"} className="nav-link" onClick={goToLink}>
+    <NavLink
+      to={"/login"}
+      className="nav-link"
+      onClick={goToLink}
+      data-testid="linkSign"
+    >
       {isLogin ? (
         <i className="bi bi-box-arrow-in-left"></i>
       ) : (
