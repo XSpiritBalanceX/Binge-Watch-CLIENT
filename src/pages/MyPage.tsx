@@ -7,7 +7,7 @@ import "@/styles/MyPage.scss";
 import { useNavigate } from "react-router-dom";
 import * as userSelectors from "@/store/selectors";
 
-const avatar = require("@/images/cat.jpg");
+const avatar = require("../images/cat.jpg");
 
 const MyPage = () => {
   const [isLoading, setLoading] = useState<boolean>(true);
