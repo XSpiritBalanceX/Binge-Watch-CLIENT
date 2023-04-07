@@ -4,48 +4,25 @@ import MyPage from "./MyPage";
 
 jest.mock("../hooks/useTypedSelector", () => ({
   useTypedSelector: () => {
-    return true;
+    return "Alice";
   },
 }));
 
-jest.mock("react-redux", () => ({
-  useDispatch: jest.fn(),
+jest.mock("../hooks/useAuthFetch", () => ({
+  useAuthFetch: () => {
+    return false;
+  },
 }));
-
-const mockedUsedNavigate = jest.fn();
-
-jest.mock("react-router-dom", () => ({
-  ...(jest.requireActual("react-router-dom") as any),
-  useNavigate: () => mockedUsedNavigate,
-}));
-
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve([]),
-  })
-) as jest.Mock;
 
 describe("Page user test:", () => {
-  it("should renred the page user", () => {
-    const { container } = render(<MyPage />, { wrapper: BrowserRouter });
-    expect(
-      container.getElementsByClassName("spiner spinner-border text-light")
-        .length
-    ).toBe(1);
+  it("should find the image on the user page when page loaded", () => {
+    const { getByAltText } = render(<MyPage />, { wrapper: BrowserRouter });
+    const image = getByAltText("avatarUser");
+    expect(image).toHaveClass("avatarUser");
   });
 
-  it("should check if fetch works", () => {
+  it("should find the name of user when user is authorized", () => {
     render(<MyPage />, { wrapper: BrowserRouter });
-    expect(fetch).toHaveBeenLastCalledWith(
-      "http://localhost:5000/api/users/profile",
-      {
-        headers: {
-          Authorization: "Bearer null",
-          "Content-type": "application/json",
-        },
-        method: "POST",
-      }
-    );
-    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(screen.getByText("Alice")).toBeInTheDocument();
   });
 });
