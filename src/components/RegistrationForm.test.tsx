@@ -29,7 +29,7 @@ const setup = () => {
 describe("Login form test:", () => {
   it("should render the component", () => {
     render(<RegistrationForm />, { wrapper: BrowserRouter });
-    expect(screen.getByText("Есть аккаунт?")).toBeInTheDocument();
+    expect(screen.getByTestId("form")).toBeInTheDocument();
   });
 
   it("should get the url with the path= /login if user click on link", () => {
@@ -57,5 +57,28 @@ describe("Login form test:", () => {
     fireEvent.change(passwordField, { target: { value: testValues.password } });
     fireEvent.change(repeatField, { target: { value: testValues.password } });
     expect(repeatField.value).toEqual(passwordField.value);
+  });
+
+  it("should display error div if user didn't fill the fields in", async () => {
+    render(<RegistrationForm />, { wrapper: BrowserRouter });
+    fireEvent.submit(screen.getByTestId("form"));
+    expect(
+      await screen.findByText("Имя пользователя обезательно")
+    ).toBeInTheDocument();
+    expect(await screen.findByText("Email обязателен")).toBeInTheDocument();
+    expect(await screen.findByText("Пароль обязателен")).toBeInTheDocument();
+  });
+
+  it("should display error div if user fills the filled in with the wrong data", async () => {
+    const { emailField, passwordField } = setup();
+
+    fireEvent.change(emailField, { target: { value: "user" } });
+    fireEvent.change(passwordField, { target: { value: "123" } });
+    fireEvent.submit(screen.getByTestId("form"));
+
+    expect(await screen.findByText("Неверный email")).toBeInTheDocument();
+    expect(
+      await screen.findByText("Пароль должен состьять из 6 символов")
+    ).toBeInTheDocument();
   });
 });

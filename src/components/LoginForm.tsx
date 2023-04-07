@@ -62,6 +62,7 @@ const LoginForm = () => {
 
   return (
     <Form
+      data-testid="form"
       className="d-flex flex-column mt-3"
       onSubmit={handleSubmit(onSubmitLogin)}
     >

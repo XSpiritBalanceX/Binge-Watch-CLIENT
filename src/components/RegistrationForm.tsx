@@ -72,6 +72,7 @@ const RegistrationForm = () => {
 
   return (
     <Form
+      data-testid="form"
       className="d-flex flex-column mt-3"
       onSubmit={handleSubmit(onSubmitRegistration)}
     >
