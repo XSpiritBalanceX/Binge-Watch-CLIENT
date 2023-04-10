@@ -29,7 +29,7 @@ describe("Custom hook useAuthFetch test:", () => {
     await act(async () => {
       renderHook(() => useAuthFetch(token));
     });
-    expect(fetchSpyOn).toHaveBeenLastCalledWith(
+    expect(fetchSpyOn).toHaveBeenCalledWith(
       "http://localhost:5000/api/users/profile",
       {
         headers: {

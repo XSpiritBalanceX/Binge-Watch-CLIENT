@@ -1,4 +1,3 @@
-import ky from "ky";
 import { toast } from "react-toastify";
 
 enum APIRouters {
@@ -21,13 +20,19 @@ export const fetchWrapper = {
 
 async function registrationUser(body: UserData) {
   try {
-    const response = await ky.post(APIRouters.registration, {
-      json: body,
+    const response = await fetch(APIRouters.registration, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     });
     if (response.status !== 200) {
       toast.error(response.statusText);
     } else {
-      return response.json();
+      const data = await response.json();
+      return data;
     }
   } catch (err: any) {
     if (err.name === "HTTPError") {
@@ -39,13 +44,19 @@ async function registrationUser(body: UserData) {
 
 async function loginUser(body: UserData) {
   try {
-    const response = await ky.post(APIRouters.login, {
-      json: body,
+    const response = await fetch(APIRouters.login, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     });
     if (response.status !== 200) {
       toast.error(response.statusText);
     } else {
-      return response.json();
+      const data = await response.json();
+      return data;
     }
   } catch (err: any) {
     if (err.name === "HTTPError") {
