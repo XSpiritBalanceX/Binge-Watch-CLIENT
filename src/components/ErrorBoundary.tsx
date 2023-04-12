@@ -1,4 +1,5 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
+import { toast } from "react-toastify";
 
 interface Props {
   children?: ReactNode;
@@ -23,7 +24,7 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      return <h1>Sorry.. there was an error</h1>;
+      toast.error("Sorry.. there was an error");
     }
 
     return this.props.children;

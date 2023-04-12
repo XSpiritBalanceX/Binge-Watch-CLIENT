@@ -1,14 +1,12 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import ky from "ky";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
-import { fetchWrapper } from "./fetchWrapper";
+import { APIUser } from "./fetchWrapper";
 
 type UserRegistrationForm = {
   username: string;
@@ -58,12 +56,11 @@ const RegistrationForm = () => {
   });
 
   const onSubmitRegistration: any = async (data: UserRegistrationForm) => {
-    let dataResponse: ResponseRegistration =
-      (await fetchWrapper.registrationUser({
-        username: data.username,
-        email: data.email,
-        password: data.password,
-      })) as ResponseRegistration;
+    let dataResponse: ResponseRegistration = await APIUser.registrationUser({
+      username: data.username,
+      email: data.email,
+      password: data.password,
+    });
     if (dataResponse) {
       navigate("/login");
       toast.success(dataResponse.message);
@@ -72,11 +69,13 @@ const RegistrationForm = () => {
 
   return (
     <Form
+      data-testid="form"
       className="d-flex flex-column mt-3"
       onSubmit={handleSubmit(onSubmitRegistration)}
     >
       <Form.Label>Имя пользователя</Form.Label>
       <Form.Control
+        aria-label="name"
         type="text"
         {...register("username")}
         className={formClassUserName}
@@ -84,6 +83,7 @@ const RegistrationForm = () => {
       <div className="invalid-feedback">{errors.username?.message}</div>
       <Form.Label>Email</Form.Label>
       <Form.Control
+        aria-label="email"
         type="email"
         {...register("email")}
         className={formClassEmail}
@@ -91,6 +91,7 @@ const RegistrationForm = () => {
       <div className="invalid-feedback">{errors.email?.message}</div>
       <Form.Label>Пароль</Form.Label>
       <Form.Control
+        aria-label="password"
         type="password"
         {...register("password")}
         className={formClassPassword}
@@ -98,6 +99,7 @@ const RegistrationForm = () => {
       <div className="invalid-feedback">{errors.password?.message}</div>
       <Form.Label>Повторите пароль</Form.Label>
       <Form.Control
+        aria-label="repeatpassword"
         type="password"
         {...register("confirmPassword")}
         className={formClassConfirmPassword}
