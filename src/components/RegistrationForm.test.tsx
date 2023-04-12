@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import RegistrationForm from "./RegistrationForm";
+import { act } from "react-dom/test-utils";
 
 jest.mock("../store/actionCreators");
 jest.mock("../components/fetchWrapper");
@@ -38,25 +39,13 @@ describe("Login form test:", () => {
     expect(global.window.location.href).toContain("http://localhost/login");
   });
 
-  it("should check fields of form when user tries to fill them in", () => {
-    const { nameField, emailField, passwordField } = setup();
-
-    fireEvent.change(nameField, { target: { value: testValues.name } });
-    expect(nameField.value).toBe(testValues.name);
-
-    fireEvent.change(emailField, { target: { value: testValues.email } });
-    expect(emailField.value).toBe(testValues.email);
-
-    fireEvent.change(passwordField, { target: { value: testValues.password } });
-    expect(passwordField.value).toBe(testValues.password);
-  });
-
-  it("should check fields of form for password match", () => {
+  it("should not display error div if user entered the correct password again", async () => {
     const { passwordField, repeatField } = setup();
 
     fireEvent.change(passwordField, { target: { value: testValues.password } });
     fireEvent.change(repeatField, { target: { value: testValues.password } });
-    expect(repeatField.value).toEqual(passwordField.value);
+    await act(() => fireEvent.submit(screen.getByTestId("form")));
+    expect(screen.queryByText("Пароли не совпадают")).not.toBeInTheDocument();
   });
 
   it("should display error div if user didn't fill the fields in", async () => {

@@ -1,14 +1,12 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import ky from "ky";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
-import { fetchWrapper } from "./fetchWrapper";
+import { APIUser } from "./fetchWrapper";
 
 type UserRegistrationForm = {
   username: string;
@@ -58,12 +56,11 @@ const RegistrationForm = () => {
   });
 
   const onSubmitRegistration: any = async (data: UserRegistrationForm) => {
-    let dataResponse: ResponseRegistration =
-      (await fetchWrapper.registrationUser({
-        username: data.username,
-        email: data.email,
-        password: data.password,
-      })) as ResponseRegistration;
+    let dataResponse: ResponseRegistration = await APIUser.registrationUser({
+      username: data.username,
+      email: data.email,
+      password: data.password,
+    });
     if (dataResponse) {
       navigate("/login");
       toast.success(dataResponse.message);

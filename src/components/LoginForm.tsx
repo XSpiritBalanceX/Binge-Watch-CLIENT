@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -9,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { loginUser } from "@/store/actionCreators";
 import classNames from "classnames";
-import { fetchWrapper } from "@/components/fetchWrapper";
+import { APIUser } from "@/components/fetchWrapper";
 
 type UserLoginForm = {
   email: string;
@@ -49,10 +48,10 @@ const LoginForm = () => {
   });
 
   const onSubmitLogin: any = async (data: UserLoginForm) => {
-    let dataResponse: ResponseLogin = (await fetchWrapper.loginUser({
+    let dataResponse: ResponseLogin = await APIUser.loginUser({
       email: data.email,
       password: data.password,
-    })) as ResponseLogin;
+    });
     if (dataResponse) {
       navigate("/mypage");
       toast.success(dataResponse.message);

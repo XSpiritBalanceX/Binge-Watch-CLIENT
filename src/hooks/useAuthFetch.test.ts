@@ -18,8 +18,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock;
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAdXNlci5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiJ9.lvxQl6QQAsTgaaQi59yDHK43aWc7JwTlXKtQgJpiI6g";
+const token = "token.string";
 
 describe("Custom hook useAuthFetch test:", () => {
   const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");

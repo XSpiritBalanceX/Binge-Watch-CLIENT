@@ -13,55 +13,55 @@ type UserData = {
   password: string;
 };
 
-export const fetchWrapper = {
+interface ResponseUser {
+  token?: string;
+  message: string;
+}
+
+const fetchWrapper = {
+  get,
+  post,
+};
+
+function get(url: string) {
+  const requestOptions = {
+    method: "GET",
+  };
+  return fetch(url, requestOptions).then(handleResponse);
+}
+
+function post(url: string, body: UserData) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .catch((err) => {
+      toast.error(err);
+    });
+}
+
+function handleResponse(response: any) {
+  return response.json().then((data: ResponseUser) => {
+    if (!response.ok) {
+      const error = response.statusText;
+      return Promise.reject(error);
+    }
+    return data;
+  });
+}
+
+export const APIUser = {
   registrationUser,
   loginUser,
 };
 
-async function registrationUser(body: UserData) {
-  try {
-    const response = await fetch(APIRouters.registration, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-    if (response.status !== 200) {
-      toast.error(response.statusText);
-    } else {
-      const data = await response.json();
-      return data;
-    }
-  } catch (err: any) {
-    if (err.name === "HTTPError") {
-      const errorJson = await err.response.json();
-      toast.error(errorJson.message);
-    }
-  }
+function loginUser(body: UserData) {
+  return fetchWrapper.post(APIRouters.login, body);
 }
 
-async function loginUser(body: UserData) {
-  try {
-    const response = await fetch(APIRouters.login, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-    if (response.status !== 200) {
-      toast.error(response.statusText);
-    } else {
-      const data = await response.json();
-      return data;
-    }
-  } catch (err: any) {
-    if (err.name === "HTTPError") {
-      const errorJson = await err.response.json();
-      toast.error(errorJson.message);
-    }
-  }
+function registrationUser(body: UserData) {
+  return fetchWrapper.post(APIRouters.registration, body);
 }

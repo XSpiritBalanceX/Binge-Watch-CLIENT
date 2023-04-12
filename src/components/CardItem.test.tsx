@@ -16,19 +16,20 @@ const fakeInfoSeries = {
 };
 
 describe("Card item test:", () => {
-  it("should render info about data of new seasons", async () => {
+  it("should render info about data of new seasons if series was closed", async () => {
     render(<CardItem infoSeries={fakeInfoSeries} />);
-    let dataSeason;
-    if (fakeInfoSeries.dateofnewseason !== "закрыт") {
-      dataSeason = await screen.findByText(
-        `Дата выхода ${fakeInfoSeries.seasons + 1} сезона - ${
-          fakeInfoSeries.dateofnewseason
-        }`
-      );
-    } else {
-      dataSeason = await screen.findByText("Сериал закрыт");
-    }
+    const dataSeason = await screen.findByText("Сериал закрыт");
+    expect(dataSeason).toBeInTheDocument();
+  });
 
+  it("should render info about data of new seasons if series wasn't closed", async () => {
+    fakeInfoSeries.dateofnewseason = "11 april 2023";
+    render(<CardItem infoSeries={fakeInfoSeries} />);
+    const dataSeason = await screen.findByText(
+      `Дата выхода ${fakeInfoSeries.seasons + 1} сезона - ${
+        fakeInfoSeries.dateofnewseason
+      }`
+    );
     expect(dataSeason).toBeInTheDocument();
   });
 });
