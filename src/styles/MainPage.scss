@@ -1,0 +1,19 @@
+@import "variables";
+
+.MainPageContainer {
+    @extend %display-column;
+    margin: 5%;
+}
+
+.TopTenContainer {
+    @extend %display-row;
+    margin-bottom: 80px;
+}
+
+.topTenHeader {
+    width: 150px;
+    span {
+        font-size: 96px;
+        font-weight: 700;
+    }
+}

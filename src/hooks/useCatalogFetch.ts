@@ -57,3 +57,25 @@ export function useSeriesFetch(queryUrl: string, seriesID: string) {
   }, [urlSeries]);
   return { data, error, loading };
 }
+
+export function useMainPageFetch(queryUrl: string) {
+  const [data, setData] = useState<AllSeries[]>([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const urlMainSeries: string = queryString.stringifyUrl({
+    url: queryUrl,
+  });
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await fetch(urlMainSeries);
+        const getData = await response.json();
+        setData(getData);
+        setLoading(false);
+      } catch (err: any) {
+        setError(err);
+      }
+    })();
+  }, []);
+  return { data, error, loading };
+}
