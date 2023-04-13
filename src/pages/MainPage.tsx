@@ -2,12 +2,20 @@ import React from "react";
 import TopTen from "@/components/TopTen";
 import "@/styles/MainPage.scss";
 import { Spinner } from "react-bootstrap";
-import { useMainPageFetch } from "@/hooks/useCatalogFetch";
+import { useCatalogFetch } from "@/hooks/useCatalogFetch";
+import { urlToCatalog } from "@/components/fetchWrapper";
+import LatesAddedSeries from "@/components/LatesAddedSeries";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
-  const { data, error, loading } = useMainPageFetch(
-    "http://localhost:5000/api/series"
-  );
+  const navigate = useNavigate();
+  const genre = "сериалы";
+  const { data, error, loading } = useCatalogFetch(urlToCatalog, genre);
+
+  const goToSeriesPage = (id: string) => {
+    navigate("/series/" + id);
+  };
+
   return (
     <React.Fragment>
       {error ? (
@@ -17,7 +25,22 @@ const MainPage = () => {
       ) : (
         <div className="MainPageContainer">
           <TopTen />
-          <div>Новинки</div>
+          <div>
+            <h5>Последние добавленные сериалы</h5>
+            <div className="latestSeriesContainer">
+              {data
+                .map((el) => {
+                  return (
+                    <LatesAddedSeries
+                      key={el.id}
+                      infoSeries={el}
+                      cbGoToSeriesPage={goToSeriesPage}
+                    />
+                  );
+                })
+                .slice(-10)}
+            </div>
+          </div>
         </div>
       )}
     </React.Fragment>

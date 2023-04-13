@@ -17,3 +17,18 @@
         font-weight: 700;
     }
 }
+
+.latestSeriesContainer {
+    @extend %display-row;
+    flex-wrap: wrap;
+    padding-left: 5%;
+    img {
+        width: 13em;
+        height: 17em;
+        margin: 3% 2% 0 0;
+    }
+    img:hover {
+        cursor: pointer;
+        box-shadow: map-deep-get($theme-colors, "shadow-for", "image");
+    }
+}

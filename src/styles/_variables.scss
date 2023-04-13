@@ -8,6 +8,12 @@ $theme-colors: (
     "text": (
         "grey": rgba(255, 255, 255, 0.55),
     ),
+    "shadow-for": (
+        "image": (
+            0px 0px 8px rgba(34, 44, 244, 0.688),
+            0px 6px 10px rgba(6, 22, 249, 0.467),
+        ),
+    ),
 );
 
 @function map-deep-get($map, $keys...) {
