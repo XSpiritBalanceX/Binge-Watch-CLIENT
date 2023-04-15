@@ -2,7 +2,7 @@ import "@/styles/MainPage.scss";
 import { AllSeries } from "@/hooks/useCatalogFetch";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-interface MainSeriesProps {
+interface LatestSeriesProps {
   infoSeries: AllSeries;
   cbGoToSeriesPage: (id: string) => void;
 }
@@ -10,7 +10,7 @@ interface MainSeriesProps {
 const LatesAddedSeries = ({
   infoSeries,
   cbGoToSeriesPage,
-}: MainSeriesProps) => {
+}: LatestSeriesProps) => {
   return (
     <OverlayTrigger
       key={infoSeries.id}

@@ -13,6 +13,11 @@ export interface AllSeries {
   dateofnewseason: string;
 }
 
+interface MainSeries {
+  latestSeries: AllSeries[];
+  topTenSeries: AllSeries[];
+}
+
 export function useCatalogFetch(queryUrl: string, genrePage: string) {
   const [data, setData] = useState<AllSeries[]>([]);
   const [error, setError] = useState(null);
@@ -58,17 +63,16 @@ export function useSeriesFetch(queryUrl: string, seriesID: string) {
   return { data, error, loading };
 }
 
-export function useMainPageFetch(queryUrl: string) {
-  const [data, setData] = useState<AllSeries[]>([]);
+export function useMainPageFetch() {
+  const [data, setData] = useState<MainSeries>({} as MainSeries);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const urlMainSeries: string = queryString.stringifyUrl({
-    url: queryUrl,
-  });
   useEffect(() => {
     (async function () {
       try {
-        const response = await fetch(urlMainSeries);
+        const response = await fetch(
+          "http://localhost:5000/api/series/mainseries"
+        );
         const getData = await response.json();
         setData(getData);
         setLoading(false);

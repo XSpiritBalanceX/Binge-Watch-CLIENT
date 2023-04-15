@@ -1,16 +1,13 @@
 import React from "react";
-import TopTen from "@/components/TopTen";
 import "@/styles/MainPage.scss";
 import { Spinner } from "react-bootstrap";
-import { useCatalogFetch } from "@/hooks/useCatalogFetch";
-import { urlToCatalog } from "@/components/fetchWrapper";
-import LatesAddedSeries from "@/components/LatesAddedSeries";
+import { useMainPageFetch } from "@/hooks/useCatalogFetch";
+import MainItem from "@/components/MainItem";
 import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const genre = "сериалы";
-  const { data, error, loading } = useCatalogFetch(urlToCatalog, genre);
+  const { data, error, loading } = useMainPageFetch();
 
   const goToSeriesPage = (id: string) => {
     navigate("/series/" + id);
@@ -24,21 +21,33 @@ const MainPage = () => {
         <Spinner animation="border" variant="light" className="spiner" />
       ) : (
         <div className="MainPageContainer">
-          <TopTen />
-          <div>
+          <div className="seriesContainer">
+            <div className="topTenHeader">
+              <h5>Топ сериалов </h5>
+              <span>10</span>
+            </div>
+            {data.topTenSeries.map((el) => {
+              return (
+                <MainItem
+                  key={el.id}
+                  infoSeries={el}
+                  cbGoToSeriesPage={goToSeriesPage}
+                />
+              );
+            })}
+          </div>
+          <div className="latestSeriesContainer">
             <h5>Последние добавленные сериалы</h5>
-            <div className="latestSeriesContainer">
-              {data
-                .map((el) => {
-                  return (
-                    <LatesAddedSeries
-                      key={el.id}
-                      infoSeries={el}
-                      cbGoToSeriesPage={goToSeriesPage}
-                    />
-                  );
-                })
-                .slice(-10)}
+            <div className="seriesContainer">
+              {data.latestSeries.map((el) => {
+                return (
+                  <MainItem
+                    key={el.id}
+                    infoSeries={el}
+                    cbGoToSeriesPage={goToSeriesPage}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
