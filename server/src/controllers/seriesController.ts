@@ -22,6 +22,22 @@ class SeriesController {
       return next(ApiError.internal("Something went wrong, please try again"));
     }
   }
+  async mainSeries(req: Request, res: Response, next: NextFunction) {
+    try {
+      const allSeries = await Catalog.findAll();
+      const latestSeries = allSeries.slice(-10);
+      const topTen: number[] = [21, 18, 11, 42, 22, 47, 41, 31, 15, 5];
+      const topTenSeries = [];
+      allSeries.forEach((el, index) => {
+        if (topTen.includes(index)) {
+          topTenSeries.push(el);
+        }
+      });
+      return res.json({ latestSeries, topTenSeries });
+    } catch (err) {
+      return next(ApiError.internal("Something went wrong, please try again"));
+    }
+  }
   async oneSeries(req: Request, res: Response, next: NextFunction) {
     try {
       const id: string = req.params.id as string;
