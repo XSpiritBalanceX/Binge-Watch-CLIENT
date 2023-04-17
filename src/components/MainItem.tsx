@@ -7,10 +7,7 @@ interface LatestSeriesProps {
   cbGoToSeriesPage: (id: string) => void;
 }
 
-const LatesAddedSeries = ({
-  infoSeries,
-  cbGoToSeriesPage,
-}: LatestSeriesProps) => {
+const MainItem = ({ infoSeries, cbGoToSeriesPage }: LatestSeriesProps) => {
   return (
     <OverlayTrigger
       key={infoSeries.id}
@@ -19,6 +16,7 @@ const LatesAddedSeries = ({
     >
       <img
         title={infoSeries.name}
+        alt={infoSeries.name}
         src={infoSeries.url}
         onClick={(e) => cbGoToSeriesPage(infoSeries.id as string)}
       />
@@ -26,4 +24,4 @@ const LatesAddedSeries = ({
   );
 };
 
-export default LatesAddedSeries;
+export default MainItem;

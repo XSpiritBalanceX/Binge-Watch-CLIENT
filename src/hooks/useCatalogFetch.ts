@@ -13,7 +13,7 @@ export interface AllSeries {
   dateofnewseason: string;
 }
 
-interface MainSeries {
+export interface MainSeries {
   latestSeries: AllSeries[];
   topTenSeries: AllSeries[];
 }

@@ -1,4 +1,10 @@
-import { AllSeries, useCatalogFetch, useSeriesFetch } from "./useCatalogFetch";
+import {
+  AllSeries,
+  useCatalogFetch,
+  useSeriesFetch,
+  MainSeries,
+  useMainPageFetch,
+} from "./useCatalogFetch";
 import { renderHook, act, RenderHookResult } from "@testing-library/react";
 
 global.fetch = jest.fn(() =>
@@ -14,7 +20,11 @@ describe("Custom hooks testing ", () => {
   >;
   let renderResultsSeries: RenderHookResult<
     { data: AllSeries; error: unknown; loading: boolean },
-    { queryUrl: string; genrePage: string }
+    { queryUrl: string; idSeries: string }
+  >;
+  let renderResultsMainPage: RenderHookResult<
+    { data: MainSeries; error: unknown; loading: boolean },
+    unknown
   >;
 
   it("should get the data with lenght = 0 if the hook gets the wrong url", async () => {
@@ -54,6 +64,25 @@ describe("Custom hooks testing ", () => {
     });
     expect(fetchSpyOnSeries).toBeCalledWith(
       "http://localhost:5000/api/series/2"
+    );
+  });
+
+  it("should get the data from useMainPageFetch as array", async () => {
+    await act(async () => {
+      renderResultsMainPage = renderHook(() => useMainPageFetch());
+    });
+    expect(renderResultsMainPage.result.current.data).toEqual([]);
+    expect(renderResultsMainPage.result.current.loading).toBe(false);
+    expect(renderResultsMainPage.result.current.error).toBe(null);
+  });
+
+  it("should check the url when the hook was called", async () => {
+    const fetchSpyOnSeries = jest.spyOn(global, "fetch");
+    await act(async () => {
+      renderResultsMainPage = renderHook(() => useMainPageFetch());
+    });
+    expect(fetchSpyOnSeries).toBeCalledWith(
+      "http://localhost:5000/api/series/mainseries"
     );
   });
 });

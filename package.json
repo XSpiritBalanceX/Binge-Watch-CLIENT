@@ -1,7 +1,6 @@
 {
   "name": "binge-watch",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "browser": {
     "[module-name]": false
@@ -81,5 +80,6 @@
     "styled-jsx": "^5.1.2",
     "web-vitals": "^3.1.1",
     "yup": "^1.0.1"
-  }
+  },
+  "description": ""
 }
