@@ -26,13 +26,12 @@ class SeriesController {
     try {
       const allSeries = await Catalog.findAll();
       const latestSeries = allSeries.slice(-10);
+      //fake data about the top series
+      //it will be replaced with real logic to sort the best series
       const topTen: number[] = [21, 18, 11, 42, 22, 47, 41, 31, 15, 5];
-      const topTenSeries = [];
-      allSeries.forEach((el, index) => {
-        if (topTen.includes(index)) {
-          topTenSeries.push(el);
-        }
-      });
+      const topTenSeries = allSeries.filter((el, index) =>
+        topTen.includes(index)
+      );
       return res.json({ latestSeries, topTenSeries });
     } catch (err) {
       return next(ApiError.internal("Something went wrong, please try again"));

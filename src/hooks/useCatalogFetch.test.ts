@@ -23,7 +23,7 @@ describe("Custom hooks testing ", () => {
     { queryUrl: string; idSeries: string }
   >;
   let renderResultsMainPage: RenderHookResult<
-    { data: MainSeries; error: unknown; loading: boolean },
+    { data: MainSeries | null; error: unknown; loading: boolean },
     unknown
   >;
 

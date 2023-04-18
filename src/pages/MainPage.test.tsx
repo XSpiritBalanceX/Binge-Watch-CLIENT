@@ -20,7 +20,7 @@ jest.mock("../hooks/useCatalogFetch", () => ({
 }));
 
 describe("Main page test:", () => {
-  it("should render spiner if data acquisition is in progress", async () => {
+  it("should render spinner if data acquisition is in progress", async () => {
     const { container } = render(<MainPage />, { wrapper: BrowserRouter });
     expect(
       container.getElementsByClassName("spiner spinner-border text-light")

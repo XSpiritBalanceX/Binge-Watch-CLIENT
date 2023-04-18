@@ -64,7 +64,7 @@ export function useSeriesFetch(queryUrl: string, seriesID: string) {
 }
 
 export function useMainPageFetch() {
-  const [data, setData] = useState<MainSeries>({} as MainSeries);
+  const [data, setData] = useState<MainSeries | null>(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
