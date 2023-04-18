@@ -15,11 +15,11 @@ const MainPage = () => {
 
   return (
     <React.Fragment>
-      {error ? (
-        <div className="errorDiv">Упс... Что-то пошло не так</div>
-      ) : loading ? (
+      {error && <div className="errorDiv">Упс... Что-то пошло не так</div>}
+      {loading && (
         <Spinner animation="border" variant="light" className="spiner" />
-      ) : (
+      )}
+      {data && (
         <div className="MainPageContainer">
           <div className="seriesContainer">
             <div className="topTenHeader">

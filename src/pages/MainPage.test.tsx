@@ -9,7 +9,7 @@ jest.mock("react-router-dom", () => ({
 }));
 jest.mock("../components/MainItem", () => () => "MainItem");
 const mockData = {
-  data: {} as MainSeries,
+  data: null as null | MainSeries,
   loading: true,
   error: null as string | null,
 };
