@@ -1,6 +1,6 @@
 import React from "react";
 import "@/styles/MainPage.scss";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Container, Row, Col } from "react-bootstrap";
 import { useMainPageFetch } from "@/hooks/useCatalogFetch";
 import MainItem from "@/components/MainItem";
 import { useNavigate } from "react-router-dom";
@@ -20,26 +20,13 @@ const MainPage = () => {
         <Spinner animation="border" variant="light" className="spiner" />
       )}
       {data && (
-        <div className="MainPageContainer">
-          <div className="seriesContainer">
-            <div className="topTenHeader">
-              <h5>Топ сериалов </h5>
-              <span>10</span>
-            </div>
-            {data.topTenSeries.map((el) => {
-              return (
-                <MainItem
-                  key={el.id}
-                  infoSeries={el}
-                  cbGoToSeriesPage={goToSeriesPage}
-                />
-              );
-            })}
-          </div>
-          <div className="latestSeriesContainer">
-            <h5>Последние добавленные сериалы</h5>
-            <div className="seriesContainer">
-              {data.latestSeries.map((el) => {
+        <Container>
+          <Row>
+            <Col className="seriesContainer">
+              <p>
+                Топ сериалов <span>10</span>
+              </p>
+              {data.topTenSeries.map((el) => {
                 return (
                   <MainItem
                     key={el.id}
@@ -48,9 +35,23 @@ const MainPage = () => {
                   />
                 );
               })}
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+          <Row>
+            <h4>Последние добавленные сериалы</h4>
+          </Row>
+          <Row className="seriesContainer">
+            {data.latestSeries.map((el) => {
+              return (
+                <MainItem
+                  key={el.id}
+                  infoSeries={el}
+                  cbGoToSeriesPage={goToSeriesPage}
+                />
+              );
+            })}
+          </Row>
+        </Container>
       )}
     </React.Fragment>
   );
