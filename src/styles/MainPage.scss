@@ -1,0 +1,26 @@
+@import "variables";
+
+.seriesContainer {
+  margin-bottom: 5%;
+  p {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 200px;
+    margin-right: 35px;
+    font-size: 23px;
+  }
+  span {
+    font-size: 96px;
+    font-weight: 700;
+  }
+  img {
+    width: 13em;
+    height: 17em;
+    margin: 3% 2% 0 0;
+  }
+  img:hover {
+    cursor: pointer;
+    box-shadow: map-deep-get($theme-colors, "shadow-for", "image");
+  }
+}

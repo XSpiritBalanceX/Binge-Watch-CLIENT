@@ -13,6 +13,11 @@ export interface AllSeries {
   dateofnewseason: string;
 }
 
+export interface MainSeries {
+  latestSeries: AllSeries[];
+  topTenSeries: AllSeries[];
+}
+
 export function useCatalogFetch(queryUrl: string, genrePage: string) {
   const [data, setData] = useState<AllSeries[]>([]);
   const [error, setError] = useState(null);
@@ -55,5 +60,26 @@ export function useSeriesFetch(queryUrl: string, seriesID: string) {
       }
     })();
   }, [urlSeries]);
+  return { data, error, loading };
+}
+
+export function useMainPageFetch() {
+  const [data, setData] = useState<MainSeries | null>(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/series/mainseries"
+        );
+        const getData = await response.json();
+        setData(getData);
+        setLoading(false);
+      } catch (err: any) {
+        setError(err);
+      }
+    })();
+  }, []);
   return { data, error, loading };
 }
