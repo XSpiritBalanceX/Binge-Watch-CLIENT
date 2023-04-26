@@ -7,6 +7,8 @@ enum APIRouters {
 
 export const urlToCatalog: string = "http://localhost:5000/api/series";
 
+export const urlToUserSeries: string = "http://localhost:5000/api/actions";
+
 type UserData = {
   username?: string;
   email: string;
