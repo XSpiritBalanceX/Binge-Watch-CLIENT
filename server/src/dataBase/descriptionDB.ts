@@ -14,7 +14,10 @@ interface UserModel
     InferAttributes<UserModel>,
     InferCreationAttributes<UserModel>
   > {
-  addSeries: BelongsToManyAddAssociationMixin<CatalogModel, CatalogModel["id"]>;
+  addBwseries: BelongsToManyAddAssociationMixin<
+    CatalogModel,
+    CatalogModel["id"]
+  >;
   id: CreationOptional<string>;
   username: string;
   email: string;
