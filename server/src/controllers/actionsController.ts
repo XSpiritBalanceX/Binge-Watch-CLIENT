@@ -50,6 +50,20 @@ class ActionsController {
       return next(ApiError.internal("Something went wrong, please try again"));
     }
   }
+
+  async getUserSeries(req: Request, res: Response, next: NextFunction) {
+    try {
+      const username: string = req.query.username as string;
+      const userSeries = await UserModel.findOne({
+        where: { username },
+        include: Catalog,
+        attributes: ["id"],
+      });
+      return res.json({ userSeries });
+    } catch (err) {
+      return next(ApiError.internal("Something went wrong, please try again"));
+    }
+  }
 }
 
 export default new ActionsController();
