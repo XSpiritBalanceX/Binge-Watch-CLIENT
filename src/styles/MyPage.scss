@@ -1,10 +1,63 @@
+@import "variables";
+
 .mainContainerMyPage {
-    margin: 5%;
+  margin: 5%;
+  img {
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+    margin-right: 20px;
+  }
 }
 
-.avatarUser {
-    border-radius: 50%;
+.nav-tabs {
+  border: none;
+  .nav-link:focus,
+  .nav-link:hover {
+    border: none !important;
+  }
+  button {
+    background-color: transparent !important;
+    color: map-deep-get($theme-colors, "text", "grey");
+  }
+  button.active {
+    border: none;
+    border-bottom: solid 1px map-get($theme-colors, "main") !important;
+    color: map-get($theme-colors, "main") !important;
+  }
+  button:hover {
+    border: none !important;
+  }
+}
+
+.tab-content > .active {
+  @extend %display-row;
+}
+
+.CardUserSeries {
+  width: 15em;
+  height: auto;
+  background-color: transparent;
+  margin: 20px 20px 0 0;
+  .card-body {
+    border: solid 1px map-get($theme-colors, "main");
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+  }
+  img {
+    height: 20em;
+  }
+}
+
+.directionAction {
+  @extend %display-row;
+  position: relative;
+  input {
     width: 3em;
-    height: 3em;
-    margin-right: 20px;
+    border-radius: 5px;
+  }
+  .deleteButton {
+    position: absolute;
+    right: 0;
+  }
 }

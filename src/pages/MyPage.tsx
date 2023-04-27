@@ -29,8 +29,10 @@ const MyPage = () => {
       {data && (
         <Container>
           <Row className="mainContainerMyPage">
-            <img src={avatar} alt="avatarUser" className="avatarUser" />
-            {userName}
+            <Col>
+              <img src={avatar} alt="avatarUser" />
+              {userName}
+            </Col>
           </Row>
           <Row>
             <Tabs defaultActiveKey={"viewd"} id="uncontrolled-tab-example">
