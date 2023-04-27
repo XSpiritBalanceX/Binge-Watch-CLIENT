@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import queryString from "query-string";
-import { AllSeries } from "@/hooks/useCatalogFetch";
 
 export interface BWListUser {
   viewdseries: boolean;
@@ -41,6 +40,6 @@ export function useUserSeriesFetch(queryUrl: string, name: string | null) {
         setError(err);
       }
     })();
-  }, [urlUserSeries]);
+  }, []);
   return { data, error, loading };
 }

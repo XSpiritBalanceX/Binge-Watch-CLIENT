@@ -17,10 +17,12 @@ describe("Test user reducer", () => {
     const actionName: GetUserInfo = {
       type: UserActionTypes.GET_USER_INFO,
       name: "Name User",
+      email: "email user",
     };
     expect(userReducer(initialState, actionName)).toEqual({
       ...initialState,
       userName: "Name User",
+      userEmail: "email user",
     });
   });
 });

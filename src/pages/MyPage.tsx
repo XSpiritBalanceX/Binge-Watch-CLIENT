@@ -5,20 +5,44 @@ import "@/styles/MyPage.scss";
 import * as userSelectors from "@/store/selectors";
 import { useAuthFetch } from "@/hooks/useAuthFetch";
 import { useUserSeriesFetch } from "@/hooks/useUserSeriesFetch";
-import { urlToUserSeries } from "@/components/fetchWrapper";
+import { urlToUserSeries, APIUser } from "@/components/fetchWrapper";
 import ViewdSeries from "@/components/ViewdSeries";
 import DesiredSeries from "@/components/DesiredSeries";
+import { toast } from "react-toastify";
+
+interface DataResponseAdd {
+  message: string;
+}
 
 const avatar = require("../images/cat.jpg");
 
 const MyPage = () => {
   const userName = useTypedSelector(userSelectors.userNameSelect);
+  const userEmail = useTypedSelector(userSelectors.userEmailSelect);
   useAuthFetch(sessionStorage.getItem("token"));
 
   const { data, error, loading } = useUserSeriesFetch(
     urlToUserSeries,
     userName
   );
+
+  const addSeries = async (
+    id: string,
+    numberSeason: number,
+    paramReq: string
+  ) => {
+    const dataResponse: DataResponseAdd = await APIUser.addedSeriesToList(
+      paramReq,
+      {
+        email: userEmail as string,
+        idseries: id,
+        numberseason: numberSeason,
+      }
+    );
+    if (dataResponse) {
+      toast.success(dataResponse.message);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -46,7 +70,13 @@ const MyPage = () => {
               <Tab eventKey={"desired"} title="Хочу посмотреть">
                 {data.bwseries.map((el) => {
                   if (el.bwlistsusers.desiredseries) {
-                    return <DesiredSeries key={el.id} info={el} />;
+                    return (
+                      <DesiredSeries
+                        key={el.id}
+                        info={el}
+                        cbAddSeries={addSeries}
+                      />
+                    );
                   }
                 })}
               </Tab>

@@ -8,9 +8,10 @@ export const loginUser = function (bool: boolean, token: string) {
   };
 };
 
-export const getUserInfo = function (nameUser: string) {
+export const getUserInfo = function (nameUser: string, emailUser: string) {
   return {
     type: UserActionTypes.GET_USER_INFO,
     name: nameUser,
+    email: emailUser,
   };
 };

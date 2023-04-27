@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import queryString from "query-string";
 
 enum APIRouters {
   registration = "http://localhost:5000/api/users/registration",
@@ -13,6 +14,12 @@ type UserData = {
   username?: string;
   email: string;
   password: string;
+};
+
+type UserSeriesData = {
+  email: string;
+  idseries: string;
+  numberseason?: number;
 };
 
 interface ResponseUser {
@@ -32,7 +39,7 @@ function get(url: string) {
   return fetch(url, requestOptions).then(handleResponse);
 }
 
-function post(url: string, body: UserData) {
+function post(url: string, body: UserData | UserSeriesData) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -58,6 +65,7 @@ function handleResponse(response: any) {
 export const APIUser = {
   registrationUser,
   loginUser,
+  addedSeriesToList,
 };
 
 function loginUser(body: UserData) {
@@ -66,4 +74,11 @@ function loginUser(body: UserData) {
 
 function registrationUser(body: UserData) {
   return fetchWrapper.post(APIRouters.registration, body);
+}
+
+function addedSeriesToList(params: string, body: UserSeriesData) {
+  const urlUserSeries: string = queryString.stringifyUrl({
+    url: urlToUserSeries + "/" + params,
+  });
+  return fetchWrapper.post(urlUserSeries, body);
 }

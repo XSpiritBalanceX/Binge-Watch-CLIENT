@@ -9,9 +9,10 @@ interface DesiredSeriesProps {
     url: string;
     bwlistsusers: BWListUser;
   };
+  cbAddSeries: (id: string, numberSeason: number, paramReq: string) => void;
 }
 
-const DesiredSeries = ({ info }: DesiredSeriesProps) => {
+const DesiredSeries = ({ info, cbAddSeries }: DesiredSeriesProps) => {
   return (
     <Card className="CardUserSeries">
       <Card.Img
@@ -25,7 +26,7 @@ const DesiredSeries = ({ info }: DesiredSeriesProps) => {
         <div className="directionAction">
           <Button
             variant="outline-success"
-            onClick={(e) => console.log(info.id)}
+            onClick={(e) => cbAddSeries(info.id, 1, "watched")}
           >
             <i className="bi bi-check2-square"></i>
           </Button>
