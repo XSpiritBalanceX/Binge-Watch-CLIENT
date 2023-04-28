@@ -63,7 +63,13 @@ const MyPage = () => {
               <Tab eventKey={"viewd"} title="Просмотренные">
                 {data.bwseries.map((el) => {
                   if (el.bwlistsusers.viewdseries) {
-                    return <ViewdSeries key={el.id} info={el} />;
+                    return (
+                      <ViewdSeries
+                        key={el.id}
+                        info={el}
+                        cbAddSeries={addSeries}
+                      />
+                    );
                   }
                 })}
               </Tab>

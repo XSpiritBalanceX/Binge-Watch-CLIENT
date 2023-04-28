@@ -1,6 +1,7 @@
 import { BWListUser } from "@/hooks/useUserSeriesFetch";
 import { Card, Button } from "react-bootstrap";
 import "@/styles/MyPage.scss";
+import { useState } from "react";
 
 interface ViewdSeriesProps {
   info: {
@@ -11,9 +12,13 @@ interface ViewdSeriesProps {
     dateofnewseason: string;
     bwlistsusers: BWListUser;
   };
+  cbAddSeries: (id: string, numberSeason: number, paramReq: string) => void;
 }
 
-const ViewdSeries = ({ info }: ViewdSeriesProps) => {
+const ViewdSeries = ({ info, cbAddSeries }: ViewdSeriesProps) => {
+  const [numberSeason, setNumberSeason] = useState<number>(
+    info.bwlistsusers.numberofseason
+  );
   const newSeasons =
     info.dateofnewseason === "закрыт"
       ? "Сериал закрыт"
@@ -30,10 +35,14 @@ const ViewdSeries = ({ info }: ViewdSeriesProps) => {
         <Card.Title>{info.name}</Card.Title>
         <p>{newSeasons}</p>
         <div className="directionAction">
-          <input defaultValue={info.bwlistsusers.numberofseason} />
+          <input
+            type="number"
+            value={numberSeason}
+            onChange={(e) => setNumberSeason(Number(e.target.value))}
+          />
           <Button
             variant="outline-success"
-            onClick={(e) => console.log(info.id)}
+            onClick={(e) => cbAddSeries(info.id, numberSeason, "watched")}
           >
             <i className="bi bi-check2"></i>
           </Button>
