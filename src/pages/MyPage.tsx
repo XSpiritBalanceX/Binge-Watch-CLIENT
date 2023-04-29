@@ -21,11 +21,14 @@ const MyPage = () => {
   const userEmail = useTypedSelector(userSelectors.userEmailSelect);
   useAuthFetch(sessionStorage.getItem("token"));
 
-  const { data, error, loading } = useUserSeriesFetch(
+  const { data, error, loading, seriesFetch } = useUserSeriesFetch(
     urlToUserSeries,
     userName
   );
 
+  const handleClickWatched = () => {
+    seriesFetch();
+  };
   const addSeries = async (
     id: string,
     numberSeason: number,
@@ -81,6 +84,7 @@ const MyPage = () => {
                         key={el.id}
                         info={el}
                         cbAddSeries={addSeries}
+                        cbHandleClickWatched={handleClickWatched}
                       />
                     );
                   }

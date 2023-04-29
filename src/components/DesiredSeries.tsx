@@ -10,9 +10,18 @@ interface DesiredSeriesProps {
     bwlistsusers: BWListUser;
   };
   cbAddSeries: (id: string, numberSeason: number, paramReq: string) => void;
+  cbHandleClickWatched: () => void;
 }
 
-const DesiredSeries = ({ info, cbAddSeries }: DesiredSeriesProps) => {
+const DesiredSeries = ({
+  info,
+  cbAddSeries,
+  cbHandleClickWatched,
+}: DesiredSeriesProps) => {
+  const handleClickAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
+    cbAddSeries(info.id, 1, e.currentTarget.name);
+    cbHandleClickWatched();
+  };
   return (
     <Card className="CardUserSeries">
       <Card.Img
@@ -25,8 +34,9 @@ const DesiredSeries = ({ info, cbAddSeries }: DesiredSeriesProps) => {
         <Card.Title>{info.name}</Card.Title>
         <div className="directionAction">
           <Button
+            name="watched"
             variant="outline-success"
-            onClick={(e) => cbAddSeries(info.id, 1, "watched")}
+            onClick={handleClickAdd}
           >
             <i className="bi bi-check2-square"></i>
           </Button>

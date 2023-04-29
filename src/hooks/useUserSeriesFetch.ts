@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import queryString from "query-string";
 
 export interface BWListUser {
@@ -29,8 +29,8 @@ export function useUserSeriesFetch(queryUrl: string, name: string | null) {
     url: queryUrl,
     query: { username: name },
   });
-  useEffect(() => {
-    (async function () {
+  const seriesFetch = useCallback(
+    async function () {
       try {
         const response = await fetch(urlUserSeries);
         const getData = await response.json();
@@ -39,7 +39,11 @@ export function useUserSeriesFetch(queryUrl: string, name: string | null) {
       } catch (err: any) {
         setError(err);
       }
-    })();
-  }, []);
-  return { data, error, loading };
+    },
+    [queryUrl, name]
+  );
+  useEffect(() => {
+    seriesFetch();
+  }, [name]);
+  return { data, error, loading, seriesFetch };
 }

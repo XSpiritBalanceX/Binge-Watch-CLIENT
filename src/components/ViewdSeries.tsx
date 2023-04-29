@@ -23,6 +23,10 @@ const ViewdSeries = ({ info, cbAddSeries }: ViewdSeriesProps) => {
     info.dateofnewseason === "закрыт"
       ? "Сериал закрыт"
       : `Дата выхода ${info.seasons + 1} сезона - ${info.dateofnewseason}`;
+
+  const handleChangeSeason = (e: React.MouseEvent<HTMLButtonElement>) => {
+    cbAddSeries(info.id, numberSeason, e.currentTarget.name);
+  };
   return (
     <Card className="CardUserSeries">
       <Card.Img
@@ -41,8 +45,9 @@ const ViewdSeries = ({ info, cbAddSeries }: ViewdSeriesProps) => {
             onChange={(e) => setNumberSeason(Number(e.target.value))}
           />
           <Button
+            name="watched"
             variant="outline-success"
-            onClick={(e) => cbAddSeries(info.id, numberSeason, "watched")}
+            onClick={handleChangeSeason}
           >
             <i className="bi bi-check2"></i>
           </Button>
