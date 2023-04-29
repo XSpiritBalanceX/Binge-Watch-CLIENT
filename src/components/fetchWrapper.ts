@@ -30,6 +30,7 @@ interface ResponseUser {
 const fetchWrapper = {
   get,
   post,
+  put,
 };
 
 function get(url: string) {
@@ -43,6 +44,19 @@ function post(url: string, body: UserData | UserSeriesData) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .catch((err) => {
+      toast.error(err);
+    });
+}
+
+function put(url: string, body: UserSeriesData) {
+  const requestOptions = {
+    method: "PUT",
+    headers: { Accept: "application/json", "Content-Type": "application/json" },
     body: JSON.stringify(body),
   };
   return fetch(url, requestOptions)
@@ -66,6 +80,7 @@ export const APIUser = {
   registrationUser,
   loginUser,
   addedSeriesToList,
+  deleteSeriesFromList,
 };
 
 function loginUser(body: UserData) {
@@ -81,4 +96,11 @@ function addedSeriesToList(params: string, body: UserSeriesData) {
     url: urlToUserSeries + "/" + params,
   });
   return fetchWrapper.post(urlUserSeries, body);
+}
+
+function deleteSeriesFromList(params: string, body: UserSeriesData) {
+  const urlDeleteSeries: string = queryString.stringifyUrl({
+    url: urlToUserSeries + "/" + params,
+  });
+  return fetchWrapper.put(urlDeleteSeries, body);
 }

@@ -10,17 +10,24 @@ interface DesiredSeriesProps {
     bwlistsusers: BWListUser;
   };
   cbAddSeries: (id: string, numberSeason: number, paramReq: string) => void;
-  cbHandleClickWatched: () => void;
+  cbHandleClickUpdate: () => void;
+  cbDeleteSeries: (id: string, paramReq: string) => void;
 }
 
 const DesiredSeries = ({
   info,
   cbAddSeries,
-  cbHandleClickWatched,
+  cbHandleClickUpdate,
+  cbDeleteSeries,
 }: DesiredSeriesProps) => {
   const handleClickAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
     cbAddSeries(info.id, 1, e.currentTarget.name);
-    cbHandleClickWatched();
+    cbHandleClickUpdate();
+  };
+
+  const handleClickDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    cbDeleteSeries(info.id, e.currentTarget.name);
+    cbHandleClickUpdate();
   };
   return (
     <Card className="CardUserSeries">
@@ -41,9 +48,10 @@ const DesiredSeries = ({
             <i className="bi bi-check2-square"></i>
           </Button>
           <Button
+            name="delete"
             className="deleteButton"
             variant="outline-danger"
-            onClick={(e) => console.log(info.id)}
+            onClick={handleClickDelete}
           >
             <i className="bi bi-trash3-fill"></i>
           </Button>

@@ -26,9 +26,10 @@ const MyPage = () => {
     userName
   );
 
-  const handleClickWatched = () => {
+  const handleClickUpdate = () => {
     seriesFetch();
   };
+
   const addSeries = async (
     id: string,
     numberSeason: number,
@@ -40,6 +41,19 @@ const MyPage = () => {
         email: userEmail as string,
         idseries: id,
         numberseason: numberSeason,
+      }
+    );
+    if (dataResponse) {
+      toast.success(dataResponse.message);
+    }
+  };
+
+  const deleteSeries = async (id: string, paramReq: string) => {
+    const dataResponse: DataResponseAdd = await APIUser.deleteSeriesFromList(
+      paramReq,
+      {
+        email: userEmail as string,
+        idseries: id,
       }
     );
     if (dataResponse) {
@@ -71,6 +85,8 @@ const MyPage = () => {
                         key={el.id}
                         info={el}
                         cbAddSeries={addSeries}
+                        cbDeleteSeries={deleteSeries}
+                        cbHandleClickUpdate={handleClickUpdate}
                       />
                     );
                   }
@@ -84,7 +100,8 @@ const MyPage = () => {
                         key={el.id}
                         info={el}
                         cbAddSeries={addSeries}
-                        cbHandleClickWatched={handleClickWatched}
+                        cbDeleteSeries={deleteSeries}
+                        cbHandleClickUpdate={handleClickUpdate}
                       />
                     );
                   }

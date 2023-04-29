@@ -13,9 +13,16 @@ interface ViewdSeriesProps {
     bwlistsusers: BWListUser;
   };
   cbAddSeries: (id: string, numberSeason: number, paramReq: string) => void;
+  cbHandleClickUpdate: () => void;
+  cbDeleteSeries: (id: string, paramReq: string) => void;
 }
 
-const ViewdSeries = ({ info, cbAddSeries }: ViewdSeriesProps) => {
+const ViewdSeries = ({
+  info,
+  cbAddSeries,
+  cbHandleClickUpdate,
+  cbDeleteSeries,
+}: ViewdSeriesProps) => {
   const [numberSeason, setNumberSeason] = useState<number>(
     info.bwlistsusers.numberofseason
   );
@@ -26,6 +33,11 @@ const ViewdSeries = ({ info, cbAddSeries }: ViewdSeriesProps) => {
 
   const handleChangeSeason = (e: React.MouseEvent<HTMLButtonElement>) => {
     cbAddSeries(info.id, numberSeason, e.currentTarget.name);
+  };
+
+  const handleClickDeleteSeries = (e: React.MouseEvent<HTMLButtonElement>) => {
+    cbDeleteSeries(info.id, e.currentTarget.name);
+    cbHandleClickUpdate();
   };
   return (
     <Card className="CardUserSeries">
@@ -52,9 +64,10 @@ const ViewdSeries = ({ info, cbAddSeries }: ViewdSeriesProps) => {
             <i className="bi bi-check2"></i>
           </Button>
           <Button
+            name="delete"
             className="deleteButton"
             variant="outline-danger"
-            onClick={(e) => console.log(info.id)}
+            onClick={handleClickDeleteSeries}
           >
             <i className="bi bi-trash3-fill"></i>
           </Button>
