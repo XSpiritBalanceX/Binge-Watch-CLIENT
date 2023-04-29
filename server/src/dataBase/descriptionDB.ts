@@ -7,6 +7,7 @@ import {
   CreationOptional,
   literal,
   BelongsToManyAddAssociationMixin,
+  BelongsToManyRemoveAssociationMixin,
 } from "sequelize";
 
 interface UserModel
@@ -15,6 +16,10 @@ interface UserModel
     InferCreationAttributes<UserModel>
   > {
   addBwseries: BelongsToManyAddAssociationMixin<
+    CatalogModel,
+    CatalogModel["id"]
+  >;
+  removeBwseries: BelongsToManyRemoveAssociationMixin<
     CatalogModel,
     CatalogModel["id"]
   >;

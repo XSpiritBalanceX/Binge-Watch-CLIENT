@@ -64,6 +64,21 @@ class ActionsController {
       return next(ApiError.internal("Something went wrong, please try again"));
     }
   }
+
+  async removeSeries(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { email, idseries }: DataFromUser = req.body;
+      if (!email || !idseries) {
+        return next(ApiError.badRequest("All data not filled"));
+      }
+      const user = await UserModel.findOne({ where: { email } });
+      const series = await Catalog.findOne({ where: { id: idseries } });
+      await user.removeBwseries(series);
+      return res.json({ message: "Successfully removed" });
+    } catch (err) {
+      return next(ApiError.internal("Something went wrong, please try again"));
+    }
+  }
 }
 
 export default new ActionsController();
