@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { Spinner, Tabs, Tab, Container, Row, Col } from "react-bootstrap";
 import "@/styles/MyPage.scss";
@@ -9,6 +9,7 @@ import { urlToUserSeries, APIUser } from "@/components/fetchWrapper";
 import ViewdSeries from "@/components/ViewdSeries";
 import DesiredSeries from "@/components/DesiredSeries";
 import { toast } from "react-toastify";
+import { useUpdateSeasonFetch } from "@/hooks/useUpdateSeasonFetch";
 
 interface DataResponseAdd {
   message: string;
@@ -29,6 +30,11 @@ const MyPage = () => {
   const handleClickUpdate = () => {
     seriesFetch();
   };
+
+  const [currentIdSeries, setCurrentId] = useState<string | null>(null);
+  const [currentNumberSeason, setCurrentNumber] = useState<number | null>(null);
+
+  useUpdateSeasonFetch(currentIdSeries, currentNumberSeason, userEmail);
 
   const addSeries = async (
     id: string,
@@ -63,6 +69,11 @@ const MyPage = () => {
     return Promise.resolve();
   };
 
+  const updateSeason = (id: string, numberSeason: number) => {
+    setCurrentId(id);
+    setCurrentNumber(numberSeason);
+  };
+
   return (
     <React.Fragment>
       {error && <div className="errorDiv">Упс... Что-то пошло не так</div>}
@@ -86,7 +97,7 @@ const MyPage = () => {
                       <ViewdSeries
                         key={el.id}
                         info={el}
-                        cbAddSeries={addSeries}
+                        cbUpdateSeason={updateSeason}
                         cbDeleteSeries={deleteSeries}
                         cbHandleClickUpdate={handleClickUpdate}
                       />

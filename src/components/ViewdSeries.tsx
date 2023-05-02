@@ -12,14 +12,14 @@ interface ViewdSeriesProps {
     dateofnewseason: string;
     bwlistsusers: BWListUser;
   };
-  cbAddSeries: (id: string, numberSeason: number, paramReq: string) => void;
+  cbUpdateSeason: (id: string, numberSeason: number) => void;
   cbHandleClickUpdate: () => void;
   cbDeleteSeries: (id: string, paramReq: string) => void;
 }
 
 const ViewdSeries = ({
   info,
-  cbAddSeries,
+  cbUpdateSeason,
   cbHandleClickUpdate,
   cbDeleteSeries,
 }: ViewdSeriesProps) => {
@@ -31,8 +31,10 @@ const ViewdSeries = ({
       ? "Сериал закрыт"
       : `Дата выхода ${info.seasons + 1} сезона - ${info.dateofnewseason}`;
 
-  const handleChangeSeason = (e: React.MouseEvent<HTMLButtonElement>) => {
-    cbAddSeries(info.id, numberSeason, e.currentTarget.name);
+  const handleChangeSeason = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const numberOfSeason = Number(e.currentTarget.value);
+    setNumberSeason(numberOfSeason);
+    cbUpdateSeason(info.id, numberOfSeason);
   };
 
   const handleClickDeleteSeries = async (
@@ -56,15 +58,9 @@ const ViewdSeries = ({
           <input
             type="number"
             value={numberSeason}
-            onChange={(e) => setNumberSeason(Number(e.target.value))}
+            name={info.id}
+            onChange={handleChangeSeason}
           />
-          <Button
-            name="watched"
-            variant="outline-success"
-            onClick={handleChangeSeason}
-          >
-            <i className="bi bi-check2"></i>
-          </Button>
           <Button
             name="delete"
             className="deleteButton"

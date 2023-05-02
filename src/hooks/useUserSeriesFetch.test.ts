@@ -1,14 +1,11 @@
 import { useUserSeriesFetch, UserSeries } from "./useUserSeriesFetch";
 import { renderHook, act, RenderHookResult } from "@testing-library/react";
-import React from "react";
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve([]),
   })
 ) as jest.Mock;
-
-const useCallbackSpy = jest.spyOn(React, "useCallback");
 
 describe("useUserSeriesFetch hooks testing ", () => {
   let renderResults: RenderHookResult<
