@@ -1,18 +1,11 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import AddButton from "./AddButton";
-import { MemoryRouter } from "react-router-dom";
-import Router from "react-router-dom";
 
 jest.mock("../hooks/useTypedSelector", () => ({
   useTypedSelector: () => {
     return "someemail";
   },
 }));
-
-/* jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useParams: jest.fn(),
-})); */
 
 global.fetch = jest.fn(() =>
   Promise.resolve({

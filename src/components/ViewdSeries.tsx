@@ -35,8 +35,10 @@ const ViewdSeries = ({
     cbAddSeries(info.id, numberSeason, e.currentTarget.name);
   };
 
-  const handleClickDeleteSeries = (e: React.MouseEvent<HTMLButtonElement>) => {
-    cbDeleteSeries(info.id, e.currentTarget.name);
+  const handleClickDeleteSeries = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    await cbDeleteSeries(info.id, e.currentTarget.name);
     cbHandleClickUpdate();
   };
   return (

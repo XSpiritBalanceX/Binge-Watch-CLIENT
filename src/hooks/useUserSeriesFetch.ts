@@ -7,7 +7,7 @@ export interface BWListUser {
   numberofseason: number;
 }
 
-interface UserSeries {
+export interface UserSeries {
   id: string;
   bwseries: [
     {

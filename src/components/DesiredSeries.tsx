@@ -20,13 +20,13 @@ const DesiredSeries = ({
   cbHandleClickUpdate,
   cbDeleteSeries,
 }: DesiredSeriesProps) => {
-  const handleClickAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
-    cbAddSeries(info.id, 1, e.currentTarget.name);
+  const handleClickAdd = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    await cbAddSeries(info.id, 1, e.currentTarget.name);
     cbHandleClickUpdate();
   };
 
-  const handleClickDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    cbDeleteSeries(info.id, e.currentTarget.name);
+  const handleClickDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    await cbDeleteSeries(info.id, e.currentTarget.name);
     cbHandleClickUpdate();
   };
   return (

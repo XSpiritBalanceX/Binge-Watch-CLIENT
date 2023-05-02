@@ -46,6 +46,7 @@ const MyPage = () => {
     if (dataResponse) {
       toast.success(dataResponse.message);
     }
+    return Promise.resolve();
   };
 
   const deleteSeries = async (id: string, paramReq: string) => {
@@ -59,6 +60,7 @@ const MyPage = () => {
     if (dataResponse) {
       toast.success(dataResponse.message);
     }
+    return Promise.resolve();
   };
 
   return (
