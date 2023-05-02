@@ -57,6 +57,7 @@ const ViewdSeries = ({
         <div className="directionAction">
           <input
             type="number"
+            aria-label="changeSeason"
             value={numberSeason}
             name={info.id}
             onChange={handleChangeSeason}
