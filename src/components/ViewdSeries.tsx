@@ -23,43 +23,40 @@ const ViewdSeries = ({
   cbHandleClickUpdate,
   cbDeleteSeries,
 }: ViewdSeriesProps) => {
+  const { id, name, url, seasons, dateofnewseason, bwlistsusers } = info;
+
   const [numberSeason, setNumberSeason] = useState<number>(
-    info.bwlistsusers.numberofseason
+    bwlistsusers.numberofseason
   );
-  const newSeasons =
+  const dateOfNewSeasonsMessage =
     info.dateofnewseason === "закрыт"
       ? "Сериал закрыт"
-      : `Дата выхода ${info.seasons + 1} сезона - ${info.dateofnewseason}`;
+      : `Дата выхода ${seasons + 1} сезона - ${dateofnewseason}`;
 
   const handleChangeSeason = (e: React.ChangeEvent<HTMLInputElement>) => {
     const numberOfSeason = Number(e.currentTarget.value);
     setNumberSeason(numberOfSeason);
-    cbUpdateSeason(info.id, numberOfSeason);
+    cbUpdateSeason(id, numberOfSeason);
   };
 
   const handleClickDeleteSeries = async (
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
-    await cbDeleteSeries(info.id, e.currentTarget.name);
+    await cbDeleteSeries(id, e.currentTarget.name);
     cbHandleClickUpdate();
   };
   return (
     <Card className="CardUserSeries">
-      <Card.Img
-        variant="top"
-        src={info.url}
-        title={info.name}
-        alt={info.name}
-      />
+      <Card.Img variant="top" src={url} title={name} alt={name} />
       <Card.Body>
-        <Card.Title>{info.name}</Card.Title>
-        <p>{newSeasons}</p>
+        <Card.Title>{name}</Card.Title>
+        <p>{dateOfNewSeasonsMessage}</p>
         <div className="directionAction">
           <input
             type="number"
             aria-label="changeSeason"
             value={numberSeason}
-            name={info.id}
+            name={id}
             onChange={handleChangeSeason}
           />
           <Button

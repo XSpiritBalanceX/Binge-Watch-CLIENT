@@ -14,8 +14,7 @@ interface DataResponseAdd {
 const AddButton = () => {
   const isLogin = useTypedSelector(userSelectors.isLoginSelect);
   const userEmail = useTypedSelector(userSelectors.userEmailSelect);
-  const params = useParams();
-  const seriesID = params.id as string;
+  const { id: seriesID } = useParams();
 
   const handleAddSeries = async (
     button: React.MouseEvent<HTMLButtonElement>
@@ -24,7 +23,7 @@ const AddButton = () => {
       button.currentTarget.name,
       {
         email: userEmail as string,
-        idseries: seriesID,
+        idseries: seriesID!,
         numberseason: 1,
       }
     );
@@ -40,14 +39,14 @@ const AddButton = () => {
           <Button
             variant="outline-info"
             name="watched"
-            onClick={(e) => handleAddSeries(e)}
+            onClick={handleAddSeries}
           >
             Посмотрел
           </Button>
           <Button
             variant="outline-info"
             name="desired"
-            onClick={(e) => handleAddSeries(e)}
+            onClick={handleAddSeries}
           >
             Хочу посмотреть
           </Button>
