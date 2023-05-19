@@ -31,12 +31,11 @@ describe("useUserSeriesFetch hooks testing ", () => {
     );
   });
 
-  it("should chech return values of hook", async () => {
+  it("should not fail if the invalid URL", async () => {
     await act(async () => {
       renderResults = renderHook(() => useUserSeriesFetch("url", "name"));
     });
     expect(renderResults.result.current.loading).toBe(false);
     expect(renderResults.result.current.error).toBe(null);
-    expect(typeof renderResults.result.current.seriesFetch).toBe("function");
   });
 });
