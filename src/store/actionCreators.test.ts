@@ -14,7 +14,8 @@ describe("Testing action for reducer", () => {
     const expectedActionName = {
       type: UserActionTypes.GET_USER_INFO,
       name: "Name User",
+      email: "email user",
     };
-    expect(getUserInfo("Name User")).toEqual(expectedActionName);
+    expect(getUserInfo("Name User", "email user")).toEqual(expectedActionName);
   });
 });

@@ -6,6 +6,8 @@ import {
   InferCreationAttributes,
   CreationOptional,
   literal,
+  BelongsToManyAddAssociationMixin,
+  BelongsToManyRemoveAssociationMixin,
 } from "sequelize";
 
 interface UserModel
@@ -13,6 +15,14 @@ interface UserModel
     InferAttributes<UserModel>,
     InferCreationAttributes<UserModel>
   > {
+  addBwseries: BelongsToManyAddAssociationMixin<
+    CatalogModel,
+    CatalogModel["id"]
+  >;
+  removeBwseries: BelongsToManyRemoveAssociationMixin<
+    CatalogModel,
+    CatalogModel["id"]
+  >;
   id: CreationOptional<string>;
   username: string;
   email: string;
@@ -33,6 +43,17 @@ interface CatalogModel
   genre: string;
   description: string;
   dateofnewseason: string;
+}
+
+interface ListsUserModel
+  extends Model<
+    InferAttributes<ListsUserModel>,
+    InferCreationAttributes<ListsUserModel>
+  > {
+  id: CreationOptional<string>;
+  viewdseries: boolean;
+  desiredseries: boolean;
+  numberofseason: number;
 }
 
 sequelize.beforeSync(async () => {
@@ -66,4 +87,22 @@ const Catalog = sequelize.define<CatalogModel>("bwseries", {
   dateofnewseason: { type: DataTypes.TEXT },
 });
 
-export { UserModel, Catalog };
+const ListsUser = sequelize.define<ListsUserModel>("bwlistsusers", {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: literal("gen_random_uuid()"),
+    primaryKey: true,
+  },
+  viewdseries: { type: DataTypes.BOOLEAN },
+  desiredseries: { type: DataTypes.BOOLEAN },
+  numberofseason: { type: DataTypes.INTEGER },
+});
+
+UserModel.belongsToMany(Catalog, {
+  through: ListsUser,
+});
+Catalog.belongsToMany(UserModel, {
+  through: ListsUser,
+});
+
+export { UserModel, Catalog, ListsUser };

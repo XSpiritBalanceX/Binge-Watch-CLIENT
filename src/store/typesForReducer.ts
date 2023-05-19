@@ -1,6 +1,7 @@
 export interface UserState {
   isLogin: boolean;
   userName: string | null;
+  userEmail: string | null;
 }
 export enum UserActionTypes {
   ISLOGIN_USER = "ISLOGIN_USER",
@@ -14,6 +15,7 @@ export interface IsloginAction {
 export interface GetUserInfo {
   type: UserActionTypes.GET_USER_INFO;
   name: string;
+  email: string;
 }
 
 export type UserAction = IsloginAction | GetUserInfo;

@@ -29,7 +29,7 @@ export function useAuthFetch(token: string | null) {
         navigate("/");
       } else {
         const data: DataAboutUser = await response.json();
-        dispatch(getUserInfo(data.message.username));
+        dispatch(getUserInfo(data.message.username, data.message.email));
         setLoading(false);
       }
     })();

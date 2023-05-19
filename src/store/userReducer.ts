@@ -5,6 +5,7 @@ let tokenInStorage: string | null = sessionStorage.getItem("token");
 export const initialState: UserState = {
   isLogin: tokenInStorage !== null ? true : false,
   userName: null,
+  userEmail: null,
 };
 
 export function userReducer(
@@ -22,6 +23,7 @@ export function userReducer(
     case UserActionTypes.GET_USER_INFO: {
       let newState = { ...state };
       newState.userName = action.name;
+      newState.userEmail = action.email;
       return newState;
     }
     default:

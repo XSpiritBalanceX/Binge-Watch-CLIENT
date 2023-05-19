@@ -1,34 +1,34 @@
 @use "sass:map";
 
 $theme-colors: (
-    "main": #64b5ff,
-    "border": (
-        "grey": rgba(255, 255, 255, 0.55),
+  "main": #64b5ff,
+  "border": (
+    "grey": rgba(255, 255, 255, 0.55),
+  ),
+  "text": (
+    "grey": rgba(255, 255, 255, 0.55),
+  ),
+  "shadow-for": (
+    "image": (
+      0px 0px 8px rgba(34, 44, 244, 0.688),
+      0px 6px 10px rgba(6, 22, 249, 0.467),
     ),
-    "text": (
-        "grey": rgba(255, 255, 255, 0.55),
-    ),
-    "shadow-for": (
-        "image": (
-            0px 0px 8px rgba(34, 44, 244, 0.688),
-            0px 6px 10px rgba(6, 22, 249, 0.467),
-        ),
-    ),
+  ),
 );
 
 @function map-deep-get($map, $keys...) {
-    @each $key in $keys {
-        $map: map-get($map, $key);
-    }
-    @return $map;
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
 }
 
 %display-row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 %display-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }

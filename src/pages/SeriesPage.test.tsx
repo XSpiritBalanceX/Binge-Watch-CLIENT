@@ -3,6 +3,7 @@ import SeriesPage from "./SeriesPage";
 import { AllSeries } from "@/hooks/useCatalogFetch";
 
 jest.mock("../components/CardItem", () => () => "CardItem");
+jest.mock("../components/AddButton", () => () => "AddButton");
 jest.mock("../hooks/useTypedSelector");
 jest.mock("../store/selectors");
 
