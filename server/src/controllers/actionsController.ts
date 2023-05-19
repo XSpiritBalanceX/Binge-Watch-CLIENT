@@ -53,9 +53,9 @@ class ActionsController {
 
   async getUserSeries(req: Request, res: Response, next: NextFunction) {
     try {
-      const username: string = req.query.username as string;
+      const { username } = req.query;
       const userSeries = await UserModel.findOne({
-        where: { username },
+        where: { username: { username } },
         include: Catalog,
         attributes: ["id"],
       });
